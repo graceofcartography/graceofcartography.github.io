@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    
+    <title>Harry Kuril: Map and analysis of Russ Cook (Hardest Geezer) running across Africa
+                        
+    </title>
+    <link rel="canonical" href="https://hkuril.com/html/en/articles/2024_project_africa.html">
+    
+    <link rel="preload" href="../../../images/../fonts/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin="">
+    <link rel="preload" href="../../../images/../fonts/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff" crossorigin="">
+    <link rel="preload" href="../../../images/../fonts/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff" crossorigin="">
+    <link rel="preload" href="../../../images/../fonts/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin="">
+    <link rel="preload" href="../../../images/../fonts/et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff" as="font" type="font/woff" crossorigin="">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link rel="shortcut icon" type="image/svg" href="../../../images/logos/kuril_logo_basic.svg">
+    
+<link rel="alternate" type="application/rss+xml" title="Harry Kuril’s web feed (RSS, English)" href="https://hkuril.com/feed-en-rss.xml">
+<link rel="alternate" type="application/atom+xml" title="Harry Kuril’s web feed (Atom, English)" href="https://hkuril.com/feed-en-atom.xml">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <header>
+        
+
+<!-- Navigation bar. --->
+<nav class="top-nav-bar">
+    <ul>
+        <li class="site-logo">
+            <a href="../../en/home.html"><img src="../../../images/logos/kuril_logo_basic.svg" alt="The Harry Kuril logo, a stylised letter K." title="The Harry Kuril logo appears at the top of all pages of HKuril.com."></a>
+        </li>
+        <li class="site-name"><a href="../../en/home.html">Harry Kuril</a></li>
+        <li><a href="../../en/articles.html">Articles</a></li>
+        <li><a href="../../en/about.html">About</a></li>
+        <li><a href="../../../php_public/account.php?lang=en">Account</a></li>
+        <li class="change-lang" lang="es"><a href="../../es/articles/2024_project_africa.html">español</a></li>
+    </ul>
+</nav>
+
+        <!-- Page header. -->
+        
+            
+                <nav>
+                      <ul class="breadcrumb">
+                        
+                            <li><a href="../../en/home.html">Home</a></li>
+                        
+                            <li><a href="../../en/articles.html">Articles</a></li>
+                        
+                            <li><a href="../../en/articles_cartography_by_date_of_publication.html">Cartography</a></li>
+                        
+                      </ul>
+                </nav>
+            
+        
+        <!-- --->
+        <h1>
+                Map and analysis of Russ Cook (Hardest Geezer) running across Africa
+            
+        </h1>
+        
+            
+        
+
+        
+            
+<p class="date-info">
+
+Article publication date: 13th December 2024.</p>
+
+        
+    </header>
+
+    
+
+
+        
+<section id="intro">
+<p>
+    <span class="margin-content">
+        <img src="../../../images/2024_project_africa/russ_cook_mugshot_small.png" alt="An image of Russ Cook taken from one of his Instagram videos filmed during day 337 of his journey. The shot is of Cook’s face and bushy ginger beard. Cook is grimacing and wearing swimming goggles as he is running through a Saharan dust storm." title="Russ Cook faced many challenges on his run across Africa, including dust storms in the Sahara, which he combated by wearing swimming goggles.">
+        <!-- loading = "" -->
+        An image of Russ Cook from one of his <a href="https://www.instagram.com/p/C45TCd6oIwz/" target="_blank" rel="noopener">Instagram videos</a>, from day 337 of his journey. He wore swimming goggles to allow him to keep running during a dust storm in the Sahara.
+    </span>
+    On 7th April 2024, Russ Cook finished his “Project Africa” run between Africa’s southernmost and northernmost mainland points. Cook, also known as Hardest Geezer, ran about 16,300 kilometres (10,100 miles) in 352 days, supported by a crew who travelled by motor vehicle. He is the first person known to have completed this route on foot. In this blog post, I have analysed his GPS recordings and other data, in order to better understand how he did it.
+</p>
+</section>
+<section id="contents">
+<h2>
+    Contents
+</h2>
+<ul>
+    <li>
+        <a href="#route">The route</a>
+    </li>
+    <li>
+        <a href="#analysis">Route data and analysis</a>
+        <ul>
+            <li>
+                <a href="#stats">Key numbers and statistics</a>
+            </li>
+            <li>
+                <a href="#activity">Running activity log</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#methods">My methods</a>
+        <ul>
+            <li>
+                <a href="#getting-data">Getting the GPS recordings</a>
+            </li>
+            <li>
+                <a href="#processing">Processing</a>
+            </li>
+            <li>
+                <a href="#sharing">Sharing code and data</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#future">Future steps and conclusions</a>
+    </li>
+</ul>
+</section>
+<!-- -->
+<section id="route">
+<h2>
+    The route
+</h2>
+<p>
+    <span class="margin-content">
+        <img src="../../../images/2024_project_africa/russ_cook_map.png" alt="A map of Africa showing Russ Cook’s running route as a wiggly line between Africa’s southern and northern extremes. Days of the route are shown in alternating red and black, with day numbers and rest days labelled. The Natural Earth base map shows physical colours with shaded relief, along with lakes and rivers. Countries, eco-regions and some major cities are labelled. There is a link to a higher-resolution version." title="This map shows the route of Russ Cook during his Project Africa run between Africa’s southern and northern extremes." loading="lazy">
+        A map of Cook’s running route across Africa. Days of the route are shown in alternating colour, with day numbers and rest days labelled, as indicated in the legend. Click <a href="../../../images/2024_project_africa/russ_cook_map_hi_res.png">here</a> to view the high-resolution version.
+    </span>
+    The map shows the route that Russ Cook and his team took across Africa. The team had some idea of the route at the start, but they adapted it during the expedition to avoid high-risk areas and closed borders. The more direct route across the Sahara was considered too dangerous due to political instability. Cook started his run in April, which allowed him to avoid the summer heat in both the southern and northern hemispheres.
+</p>
+</section>
+<!-- -->
+<section id="data">
+<h2>
+    Route data and analysis
+</h2>
+<h3 id="stats">
+    Key numbers and statistics	
+</h3>
+<p>Here are some summary numbers for the run:</p>
+<table>
+  <tbody><tr>
+    <td class="tc-bold">Start time</td>
+    <td class="tc-left">07:24 UTC+2 on 22nd April 2023</td>
+  </tr>
+  <tr>
+    <td class="tc-bold">End date</td>
+    <td class="tc-left">16:43 UTC+1 on 7th April 2024</td>
+  </tr>
+  <tr>
+    <td class="tc-bold">Start point</td>
+    <td class="tc-left">Cape Agulhas (-34.833222 °N, 20.000000 °E)</td>
+  </tr>
+  <tr>
+    <td class="tc-bold">End point</td>
+    <td class="tc-left">Cape Angela (37.346944 °N, 9.742222 °E)</td>
+  </tr>
+  <tr>
+    <td class="tc-bold">Duration</td>
+    <td class="tc-left">351 days, 10 hours, 19 minutes</td>
+  </tr>
+  <tr>
+    <td class="tc-bold">Number of ‘rest’ days</td>
+    <td class="tc-left">43</td>
+  </tr>
+  <tr>
+    <td class="tc-bold">Distance</td>
+    <td class="tc-left">16,256.1 km (10,101.1 miles)</td>
+  </tr>
+  <tr>
+    <td class="tc-bold">Mean daily distance</td>
+    <td class="tc-left">46.18 km (28.70 miles)</td>
+  </tr>
+  <tr>
+    <td class="tc-bold">(excluding rest days)</td>
+    <td class="tc-left">52.61 km (32.69 miles)</td>
+  </tr>
+  <tr>
+    <td class="tc-bold">Longest day</td>
+    <td class="tc-left">109.95 km (68.32 miles)</td>
+  </tr>
+  <tr>
+    <td class="tc-bold">Countries visited</td>
+    <td class="tc-left">16</td>
+  </tr>
+</tbody></table>
+<p>
+    The straight-line distance between the start and end points is only 8,061.3 km (5,009.0 miles), less than half of Cook’s route. However, such a route would be impossible to run, for example because it crosses the Gulf of Gabès off the coast of Tunisia.
+</p>
+<br>
+<p>
+    <i>Notes on distance measurements</i>: There are two main sources of uncertainty in the stated distance totals. The first is that data is missing for a few days during the Sahara segment (specifically, days 309, 310, 312, 315, 318). I don’t know what caused this. (If you know, please <a href="../../en/contact.html">contact me</a>. For these missing segments, I assume straight-line distances, which is probably quite accurate based on Cook’s general pattern in the Sahara, but it is certainly an under-estimate. These missing days are shown differently in the distance histograms. Their total distance is 266.1 km.
+</p>
+<p>
+    The second source of uncertainty is that GPS recordings do not provide a perfect measure of distance. For example, the length of a jittery recording of a path is longer than the true path. The recording interval also affects the total distance, with a shorter recording interval leading to a greater total distance (related to the <a href="https://en.wikipedia.org/wiki/Coastline_paradox" target="_blank" rel="noopener">coastline paradox</a>). Cook’s recordings mostly have the same recording interval of 1 second, but a significant minority use a longer interval (usually several seconds). Overall, though, this second uncertainty should be quite small. Note this can also affect the estimates of his running pace, shown in the activity log below.
+</p>
+<p>
+    It is very likely that there are small differences between my method for calculating distance and Strava’s (for example, choice of projected coordinates), so the totals might not agree perfectly with those shown on the Strava website for daily tracks.
+</p>
+<h3 id="activity">
+    Running activity log	
+</h3>
+<p>
+    <span class="margin-content">
+        <img src="../../../images/2024_project_africa/russ_cook_activity_grid.svg" alt="A figure showing Russ Cook’s running activity throughout Project Africa. The figure has two panels. The left panel is an ‘activity grid’, with axes of ‘Day of trip’ and ‘Time of day’. Each pixel in the grid represents a 10-minute interval. Darker pixels indicate faster running. There are two black curves which show the local sunset and sunrise times. The right panel shows the daily total distance as a bar plot. Specific intervals are labelled with letters that indicate events (A, B, …) which are described in the text." title="This running log shows Russ Cook’s activity throughout his Project Africa journey. The article discusses what it means and what challenges caused the gaps in his activity." loading="lazy">
+        Russ Cook’s running log. <i>Left panel:</i> The activity grid, which shows when he was active on each day of the trip. Each pixel represents a 10-minute interval. Darker pixels indicate faster running. The black curves show the local sunset and sunrise times. <i>Right panel:</i> The daily total distance. Grey columns are estimated distance (rather than recorded). The labelled events (A, B, …) are described in the text.
+    </span>
+    The activity log shows when Cook was active during each day of his trip. For most of the trip, he didn’t start running until 1–3 hours after dawn. To begin with, he experimented with continuing to run after sunset, but after some security incidents, he settled with stopping at sunset. Towards the end of his run, he returned to running after dark. He ran nocturnally for much of the Sahara section, and then in Algeria and Tunisia he was comfortable with running in the evening darkness.
+</p>
+<p>
+    <span class="margin-content">
+        <img src="../../../images/2024_project_africa/russ_cook_daily_distance.svg" alt="A histogram of Russ Cook’s daily running distance. The distance has as roughly normal distribution centred on 52 km per day, except for a number of zero days." title="Russ Cook consistently ran 50–60 km per day, as shown in this histogram of his daily running distance." loading="lazy">
+        A histogram of Cook’s daily running distance. Grey bars show days that were not recorded and were estimated as straight-line paths.
+    </span>
+    When not disrupted, he typically ran 50–60 km per day, as also shown in daily distance summary histogram. He usually spread this distance over three sessions. His consistency was very impressive. For example, during the last 20 weeks, he had only three days off (and even these were not for rest). Throughout the trip, almost all of his ‘rest days’ can be explained by incidents. He described these incidents in exuberant and colourful Instagram updates, which I used to make this summary table:
+</p> 
+<table>
+  <tbody><tr>
+    <th class="tc-left">Event</th>
+    <th>Day(s)</th>
+    <th class="tc-left">Description</th>
+  </tr>
+  <tr>
+    <td class="tc-left">S</td>
+    <td>322</td>
+    <td class="tc-left">Visiting Sahrawi refugee camp</td>
+  </tr>
+  <tr>
+    <td class="tc-left">R</td>
+    <td>302–318</td>
+    <td class="tc-left">Crossing Sahara, night running, no updates, some data missing</td>
+  </tr>
+  <tr>
+    <td class="tc-left">Q</td>
+    <td>291–292</td>
+    <td class="tc-left">Food poisoning and visits to Nouakchott embassy</td>
+  </tr>
+  <tr>
+    <td class="tc-left">P</td>
+    <td>215–216</td>
+    <td class="tc-left">Struggling with injuries</td>
+  </tr>
+  <tr>
+    <td class="tc-left">O</td>
+    <td>200–206</td>
+    <td class="tc-left">Lower back injury</td>
+  </tr>
+  <tr>
+    <td class="tc-left">N</td>
+    <td>194</td>
+    <td class="tc-left">Van accidentally filled with petrol instead of diesel</td>
+  </tr>
+  <tr>
+    <td class="tc-left">M</td>
+    <td>181–185</td>
+    <td class="tc-left">Steep, muddy roads (avoiding conflict zones)</td>
+  </tr>
+  <tr>
+    <td class="tc-left">L</td>
+    <td>167–169</td>
+    <td class="tc-left">Food poisoning</td>
+  </tr>
+  <tr>
+    <td class="tc-left">K</td>
+    <td>136–142</td>
+    <td class="tc-left">Support van breaks down, then crashes during towing</td>
+  </tr>
+  <tr>
+    <td class="tc-left">J</td>
+    <td>125</td>
+    <td class="tc-left">Returned to Cabinda to fix Congo visa issue</td>
+  </tr>
+  <tr>
+    <td class="tc-left">I</td>
+    <td>111–121</td>
+    <td class="tc-left">Logistics in Cabinda</td>
+  </tr>
+  <tr>
+    <td class="tc-left">H</td>
+    <td>104–106</td>
+    <td class="tc-left">Separated from team and held captive (twice) deep in jungle</td>
+  </tr>
+  <tr>
+    <td class="tc-left">G</td>
+    <td>75–88</td>
+    <td class="tc-left">Return to Windhoek for new visas due to passport theft</td>
+  </tr>
+  <tr>
+    <td class="tc-left">F</td>
+    <td>64</td>
+    <td class="tc-left">Whole team robbed at gunpoint in van</td>
+  </tr>
+  <tr>
+    <td class="tc-left">E</td>
+    <td>45–46</td>
+    <td class="tc-left">Rest and doctor visit due to blood in urine</td>
+  </tr>
+  <tr>
+    <td class="tc-left">D</td>
+    <td>39</td>
+    <td class="tc-left">Visa day including return drive to Windhoek</td>
+  </tr>
+  <tr>
+    <td class="tc-left">C</td>
+    <td>35</td>
+    <td class="tc-left">Support crew evade armed men</td>
+  </tr>
+  <tr>
+    <td class="tc-left">B</td>
+    <td>26–28</td>
+    <td class="tc-left">Stomach illness</td>
+  </tr>
+  <tr>
+    <td class="tc-left">A</td>
+    <td>17–18</td>
+    <td class="tc-left">Crossed border without van and ran solo overnight</td>
+  </tr>
+</tbody></table>
+</section>
+<!-- -->
+<section id="methods">
+<h2>
+    My methods
+</h2>
+<p>
+    If you are not interested in technical details, I suggest that you skip to the <a href="#future">final section</a>. It’s nice to note that all the tools I used are free and open source.
+</p>
+<h3 id="getting-data">
+    Getting the GPS recordings	
+</h3>
+<p>
+    The most difficult part was obtaining the dataset. Russ Cook uploaded his GPS recordings to Strava. You might think that the easiest approach would be to use the Strava API, but this requires Russ Cook himself to authenticate—even though his account is public! I didn’t want to bother Mr Cook, and I thought it was unlikely he would even notice my request, so I looked for another way.
+</p>
+<p>
+    I discovered that a Reddit user, <a href="https://www.reddit.com/user/hangglidingcrow/" target="_blank" rel="noopener">u/hangglidingcrow</a>, had downloaded Cook’s files, one by one. They said it took a few hours, while watching television. They generously uploaded the files for anybody to download <a href="https://www.reddit.com/r/datavisualization/comments/1c3xh0d/sharing_the_data_and_code_associated_with_an/" target="_blank" rel="noopener">here</a>.
+</p>
+<p>
+    Unfortunately, the files have no time-stamp information. It seems that Strava removes this information from the GPX files before serving them up. This makes it impossible to analyse pace or activity time. I’m not certain why Strava does this, but it might be to reduce file size, for user privacy reasons, or to obstruct hobbyist map-coders. Since Russ Cook was on a publicised mission, it does not seem like an invasion of privacy to reconstruct the full dataset with time-stamps. This is possible because Strava allows <code class="inline">GET</code> requests like this:
+    <code>https://www.strava.com/activities/11075843853/streams?stream_types[]=latlng&amp;stream_types[]=time</code>
+    where <code class="inline">11075843853</code> is the activity ID. You have to be logged in, and it will only work if it is an activity for which you have viewing access to. You can request other bits of information, such as heart rate, as indicated in the <a href="https://developers.strava.com/docs/reference/" target="_blank" rel="noopener">API reference</a>. The request will return JSON with arrays of coordinates and time. The times are given in integer seconds relative to the start time of the activity. I did not work out how to request the starting time-stamp, but this time-stamp is also written on the activity page (in this example, that would be <a href="https://www.strava.com/activities/11075843853" target="_blank" rel="noopener">here</a>). I assumed the time zone for each track was defined by the time zone of the starting point.
+</p>
+<p>
+    This process could be automated, but that would be a violation of Strava’s terms of service, and I would never do that to such a benevolent corporation.
+</p>
+<h3 id="processing">
+    Processing	
+</h3>
+<p>
+    Using the method above, I gathered a JSON file for each of the 372 recordings, which contained coordinates and elapsed time. I also had the starting time stamps. In Python, I processed this information into a GeoPandas GeoDataFrame (GDF) with a LineString geometry, with one row per recording. I applied time zone information. I calculated the “day of trip” for each recording (some recordings continue through midnight, but these still belong to the preceding day). I saved the GDF as a GeoPackage, and used that to make the map in QGIS.
+</p>
+<p>
+For the activity grid, I also needed distance information. I used <code class="inline">pyproj</code> to re-project each track into a local coordinate system and calculate the distance between each point. The JSON file has a ‘moving’ flag, so I ignored any distance from non-moving time steps (for example, if the recording device was paused and then restarted in a different location). To create the grid, I binned all the distance information onto a grid of day and time, using the functions <code class="inline">digitize</code> and <code class="inline">bincount</code> (with weights) from NumPy. It was necessary to first split any time steps that crossed over a grid line.
+</p>
+<p>
+    I calculated sunrise and sunset times with the using the <a href="https://astral.readthedocs.io/en/latest/" target="_blank" rel="noopener">Astral</a> Python library. I used Cook’s most recent position for a fixed morning and evening time.
+</p>
+<h3 id="sharing">
+    Sharing code and data	
+</h3>
+<p>
+    I like to share code and data, but it takes some work, and I’m not sure anybody would like to see it anyway. Until I find time to tidy things up and post them here, please <a href="../../en/contact.html">contact me</a> if you are interested. Please explain what you want and what you plan to do with it.
+</p>
+</section>
+<!-- -->
+<section id="future">
+<h2>
+    Future steps and conclusions
+</h2>
+<p>
+    It would be possible to analyse more aspects of Cook’s journey, for example weather, elevation gain, road surface, heart rate, cadence, and moving time. If this is something you’d like to see, please let me know in the comments section below or via my <a href="../../en/contact.html">contact details</a> (where you can also follow me for future updates). I would also love suggestions for other amazing journeys to look into, as well as other comments and corrections.
+</p>
+<p>
+    Running the length of Africa is obviously an impressive feat. I am even more impressed after doing this analysis, and seeing how consistent Cook’s effort was. He also overcame significant personal challenges relating to mental health and addiction. I find this inspiring and I hope you do to! If you do, please consider donating to his <a href="https://givestar.io/gs/PROJECTAFRICA" target="_blank" rel="noopener">charity appeal</a>.
+</p>
+</section>
+
+
+        
+
+        
+        <section class="comments">
+<div class="comment_header">
+<!--<span class="total">Comments (1)</span>-->
+<h2 class="total">Comments (1)</h2>
+</div>
+
+<div class="comments_wrapper">
+
+    <div class="comment" data-id="16" id="comment-16">
+        <div class="con">
+            <div>
+                <h3 class="name">Chris MD </h3>
+                <span class="date">3 months ago</span>
+            </div>
+            <div class="comment_content">
+                Impressive and he took the uphill choice...
+            </div>
+            <div class="comment_footer">
+                <a class="reply_comment_btn" href="#" data-comment-id="16">Reply</a>
+            </div>
+            <div class="replies"></div>
+        </div>
+    </div>
+    </div>
+
+
+
+<div class="comment_content">
+<input type="text" placeholder="Write your comment..." class="comment_placeholder_content" data-comment-id="-1"></div>
+
+
+<div class="write_comment hidden" data-comment-id="-1">
+    <p class="info_for_commenter">Writing a new comment.</p><p>
+    </p><form>
+        <input name="parent_id" type="hidden" value="-1">
+        <p><a href="../login.html">Log in or register</a> if you want your comments to be linked to your account.</p>
+    <input type="text" name="name" placeholder="Display name (optional)">
+        <div class="content">
+            <textarea name="content" placeholder="Write your comment (up to 600 characters)." required=""></textarea>
+
+        </div>
+        <p class="msg"></p>
+        <div class="group">
+            <button type="submit" class="post_button">Post</button>
+            <button type="submit" class="alt cancel_button">Cancel</button>
+        </div>
+    </form>
+</div>
+</section>
+        
+        
+
+    <footer>
+        
+
+<!-- "Back to top" button. -->
+<nav class="my-footer">
+    <ul>
+        <li><a href="#">Back to top</a></li>
+        <li>© 2023–5 Harry Kuril</li>
+        <li><a href="../../en/legal.html">Legal</a></li>
+        <li><a href="../../en/contact.html">Contact</a></li>
+        <li><a href="../../en/contact.html">Follow</a></li>
+    </ul>
+</nav>
+
+    </footer>
+
+</body></html>
