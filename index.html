@@ -68,27 +68,50 @@
             font-size: 13px;
             background-color: rgba(255, 255, 255, 0.8);
         }
-        
+    /* Cross-browser compatible marker styles */
         .leaflet-marker-icon {
-        width: 30px !important; /* Increase from default */
-        height: 30px !important;
-        margin-left: -15px !important; /* Half the width to keep centered */
-        margin-top: -15px !important; /* Half the height to keep centered */
-        transition: filter 0.3s ease;
-        }
+            width: 30px !important;
+            height: 30px !important;
+        /* Use transform for positioning instead of margins */
+            transform: translate(-50%, -50%) !important;
+            transition: all 0.3s ease !important;
+    }
     
-    /* Keep hover effect but make it even bigger */
+    /* Hover effect that works across browsers */
         .leaflet-marker-icon:hover {
-        width: 40px !important; 
-        height: 40px !important;
-        margin-left: -20px !important;
-        margin-top: -20px !important;
-        filter: drop-shadow(0 0 8px rgba(0,0,0,0.8)) brightness(1.3) !important;
-        z-index: 1000 !important;
+            width: 40px !important;
+            height: 40px !important;
+            filter: drop-shadow(0 0 8px rgba(0,0,0,0.8)) !important;
+            z-index: 1000 !important;
+    }
+    
+    /* Fix for Edge browser specifically */
+    @supports (-ms-ime-align:auto) {
+        .leaflet-marker-icon {
+            margin: 0 !important;
+            top: 0 !important;
+            left: 0 !important;
+            transform: translate(-15px, -15px) !important;
         }
-</style>
-</style>
+        
+        .leaflet-marker-icon:hover {
+            transform: translate(-20px, -20px) !important;
         }
+    }
+    
+    /* Add responsive adjustments for different screen sizes */
+    @media screen and (max-width: 768px) {
+        .map-container {
+            width: 100% !important;
+            height: 350px !important;
+        }
+        
+        .map-legend {
+            bottom: 20px !important;
+            left: 20px !important;
+        }
+    }
+</style>
     </style>
 </head>
 <body>
