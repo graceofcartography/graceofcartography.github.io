@@ -69,22 +69,17 @@
             background-color: rgba(255, 255, 255, 0.8);
         }
     /* Cross-browser compatible marker styles */
-        .leaflet-marker-icon {
-            width: 30px !important;
-            height: 30px !important;
-        /* Use transform for positioning instead of margins */
-            transform: translate(-50%, -50%) !important;
-            transition: all 0.3s ease !important;
-    }
+         .leaflet-marker-icon {
+        /* Only modify appearance, not positioning */
+            filter: drop-shadow(0 0 1px rgba(0,0,0,0.3));
+         }
     
-    /* Hover effect that works across browsers */
         .leaflet-marker-icon:hover {
-            width: 40px !important;
-            height: 40px !important;
-            filter: drop-shadow(0 0 8px rgba(0,0,0,0.8)) !important;
+        /* Safe hover effect that won't break positioning */
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.7)) brightness(1.2);
             z-index: 1000 !important;
-    }
-    
+         } 
+
     /* Fix for Edge browser specifically */
     @supports (-ms-ime-align:auto) {
         .leaflet-marker-icon {
@@ -112,7 +107,6 @@
         }
     }
 </style>
-    </style>
 </head>
 <body>
     <div class="header-banner">
@@ -2846,5 +2840,27 @@
         
     
                 marker_7eb40b3507a71e762ff8caa574b4b1ee.setIcon(icon_eba7c5a76049eb65693a2058d9f32837);
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            // Safely resize all markers without disrupting positioning
+            document.querySelectorAll('.leaflet-marker-icon').forEach(function(marker) {
+                // Get original dimensions
+                var width = marker.offsetWidth;
+                var height = marker.offsetHeight;
+                
+                // Scale up by 50%
+                marker.style.width = (width * 1.5) + 'px';
+                marker.style.height = (height * 1.5) + 'px';
+                
+                // Adjust position to keep centered
+                var left = parseFloat(marker.style.left || '0');
+                var top = parseFloat(marker.style.top || '0');
+                marker.style.marginLeft = (-width * 0.25) + 'px';
+                marker.style.marginTop = (-height * 0.25) + 'px';
+            });
+        }, 1000); // Wait for map to initialize
+    });
 </script>
 </body></html>
