@@ -1,0 +1,515 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.6474915,
+          36.8839505
+        ]
+      },
+      "properties": {
+        "Name: Role": "Hecamede: Enslaved",
+        "Place": "Tenedos",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/639138"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.928091,
+          39.585106
+        ]
+      },
+      "properties": {
+        "Name: Role": "Chryseis:  Freed Woman ",
+        "Place": "Chryse (?)",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/550501"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.71219331,
+          37.98381922
+        ]
+      },
+      "properties": {
+        "Name: Role": "Aegilia:  Wife",
+        "Place": "Sicyon",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/570668"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.37435885,
+          37.89126841
+        ]
+      },
+      "properties": {
+        "Name: Role": "Agamede: Wife, Medicine Woman",
+        "Place": "Elis",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/570220"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.96886,
+          39.366305
+        ]
+      },
+      "properties": {
+        "Name: Role": "Alcestis:  Wife (?)",
+        "Place": "Iolcus",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/540837"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.304133,
+          39.4991145
+        ]
+      },
+      "properties": {
+        "Name: Role": "Astyochea:  Enslaved",
+        "Place": "Ephyra",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/540886"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.79998512,
+          37.5992801
+        ]
+      },
+      "properties": {
+        "Name: Role": "Alcmene: Wife",
+        "Place": "Tiryns",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/570740"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.31765343,
+          38.31994883
+        ]
+      },
+      "properties": {
+        "Name: Role": "Andromache: Wife",
+        "Place": "Thebes",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/541138"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.42468255,
+          37.08184552
+        ]
+      },
+      "properties": {
+        "Name: Role": "Helen: Wife",
+        "Place": "Sparta",
+        "Pleiades Dataset": NaN
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.57513526,
+          36.63412058
+        ]
+      },
+      "properties": {
+        "Name: Role": "Antea: Wife",
+        "Place": "Lycia",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/638965"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.89585512,
+          37.11719301
+        ]
+      },
+      "properties": {
+        "Name: Role": "Cleopatra: Wife",
+        "Place": "Messenia",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/570480"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.42468255,
+          37.08184552
+        ]
+      },
+      "properties": {
+        "Name: Role": "Clytemnestra:  Wife",
+        "Place": "Sparta",
+        "Pleiades Dataset": NaN
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.753851,
+          39.379043
+        ]
+      },
+      "properties": {
+        "Name: Role": "Eriopis: Wife",
+        "Place": "Pherai",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/541044"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.23851562,
+          39.95743808
+        ]
+      },
+      "properties": {
+        "Name: Role": "Hippodamia:  Wife",
+        "Place": "Troy",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/550595"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.23851562,
+          39.95743808
+        ]
+      },
+      "properties": {
+        "Name: Role": "Laodice: Wife",
+        "Place": "Troy",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/550596"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.75385675,
+          37.72754669
+        ]
+      },
+      "properties": {
+        "Name: Role": "Laodice: Young  Woman",
+        "Place": "Mycenae",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/570491"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.23851562,
+          39.95743808
+        ]
+      },
+      "properties": {
+        "Name: Role": "Medesicaste: Wife",
+        "Place": "Troy",
+        "Pleiades Dataset": NaN
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.83695683,
+          40.89837733
+        ]
+      },
+      "properties": {
+        "Name: Role": "Theano: Wife, Priestess",
+        "Place": "Thrace",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/24323808"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.082027,
+          39.508231
+        ]
+      },
+      "properties": {
+        "Name: Role": "Briseis: Widow, Enslaved",
+        "Place": "Lyrnessos",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/550703"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.36274538,
+          37.49652698
+        ]
+      },
+      "properties": {
+        "Name: Role": "Aethra: Enslaved",
+        "Place": "Troezen",
+        "Pleiades Dataset": "https://athensattica.com/things-to-see/ancient-sites/ancient-troezen/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.23851562,
+          39.95743808
+        ]
+      },
+      "properties": {
+        "Name: Role": "Cassandra: Enslaved",
+        "Place": "Troy",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/550595"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.75385675,
+          37.72754669
+        ]
+      },
+      "properties": {
+        "Name: Role": "Chrysothemis: Young  Woman",
+        "Place": "Mycenae",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/570491"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.72038024,
+          37.63104689
+        ]
+      },
+      "properties": {
+        "Name: Role": "Danae: Mother",
+        "Place": "Argos",
+        "Pleiades Dataset": NaN
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.23733339,
+          39.17762388
+        ]
+      },
+      "properties": {
+        "Name: Role": "Diomede: Enslaved",
+        "Place": "Lesbos",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/550696"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.19680896,
+          33.27017737
+        ]
+      },
+      "properties": {
+        "Name: Role": "Europa: Wife",
+        "Place": "Tyre",
+        "Pleiades Dataset": "https://en.wikipedia.org/wiki/Tyre,_Lebanon"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.5,
+          37.5
+        ]
+      },
+      "properties": {
+        "Name: Role": "Hecuba: Wife, Queen",
+        "Place": "Phrygia",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/981543"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.75385675,
+          37.72754669
+        ]
+      },
+      "properties": {
+        "Name: Role": "Iphianassa: Young  Woman",
+        "Place": "Mycenae",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/570491"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.57513526,
+          36.63412058
+        ]
+      },
+      "properties": {
+        "Name: Role": "Laodamia: Mother",
+        "Place": "Lycia",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/638965"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.71184308,
+          39.59198924
+        ]
+      },
+      "properties": {
+        "Name: Role": "Laothe: Wife",
+        "Place": "Leleges",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/550692"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.73891803,
+          38.70283553
+        ]
+      },
+      "properties": {
+        "Name: Role": "Marpessa: Wife",
+        "Place": "Aetolia",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/540591"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.5,
+          37.5
+        ]
+      },
+      "properties": {
+        "Name: Role": "Niobe: Mother",
+        "Place": "Phrygia",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/981543"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.48717716,
+          40.36007295
+        ]
+      },
+      "properties": {
+        "Name: Role": "Periboea: Mother",
+        "Place": "Pieria",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/491696"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.37825266,
+          39.32170546
+        ]
+      },
+      "properties": {
+        "Name: Role": "Polydore: Mother",
+        "Place": "Phthia",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/541052"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.565356,
+          38.902984
+        ]
+      },
+      "properties": {
+        "Name: Role": "Iphis: Enslaved",
+        "Place": "Scyros",
+        "Pleiades Dataset": "https://pleiades.stoa.org/places/541108"
+      }
+    }
+  ]
+}
