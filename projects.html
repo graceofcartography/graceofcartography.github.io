@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Charissa Abi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #f4f4f4;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            color: #021b12;
+        }
+        header nav div {
+            display: inline-block;
+            background-color: #013220; /* Forest green */
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+        header nav a {
+            text-decoration: none;
+            color: #bdbd24; /* Olive */
+            font-size: 0.9rem;
+        }
+        .projects-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px; /* Reduced spacing between boxes */
+            padding: 20px;
+        }
+        .project-card {
+            width: 500px; /* Fixed width */
+            height: 300px; /* Fixed height */
+            border: 3px solid #013220; /* Forest green */
+            display: block; /* Block-level element */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for better appearance */
+            overflow: hidden; /* Ensure no overflow from the image */
+            padding: 0; /* Remove any padding */
+            margin: 0; /* Remove any margin */
+        }
+        .project-card img {
+            width: 100%; /* Stretch image to fill the width */
+            height: 100%; /* Stretch image to fill the height */
+            object-fit: cover; /* Maintain aspect ratio and crop excess */
+            object-position: 35% 40%; /* Adjust the position of the image (horizontal, vertical) */
+            display: block; /* Remove extra space below the image */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Charissa Abi</h1>
+        </div>
+        <nav>
+            <div><a href="index.html">Home</a></div>
+            <div><a href="projects.html">Projects</a></div>
+            <div><a href="#linkedin">LinkedIn</a></div>
+            <div><a href="#substack">Substack</a></div>
+            <div><a href="#youtube">YouTube</a></div>
+            <div><a href="#resume">Resume</a></div>
+        </nav>
+    </header>
+    <main>
+        <h2 style="text-align: center; margin-top: 20px;">Projects</h2>
+        <div class="projects-container">
+            <div class="project-card">
+                <a href="https://graceofcartography.github.io/IliadInteractive.html" target="_blank">
+                    <img src="https://raw.githubusercontent.com/graceofcartography/graceofcartography.github.io/main/images/IliadWebMap.png" alt="Iliad Web Map">
+                </a>
+            </div>
+            <div class="project-card">
+                <a href="#project2">[Image - Placeholder for Another Project]</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
