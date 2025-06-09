@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- You can change the title for each project page -->
+    <title>Project Elements - Charissa Abi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Darker text for contrast */
+        }
+        /* Active navigation link style */
+        .nav-active {
+            color: #047857; /* Tailwind's green-700 - a nice forest green */
+            font-weight: 600; /* semibold */
+        }
+        /* Style for the links to make them stand out */
+        .element-link a {
+            display: block;
+            padding: 0.75rem 1rem;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease-in-out;
+            color: #047857; /* Green text for links */
+            font-weight: 500;
+        }
+        .element-link a:hover {
+            background-color: #f9fafb;
+            border-color: #d1d5db;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+
+
+    <!-- Main Content: This is where you list your project elements -->
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-3xl mx-auto">
+            
+            <!-- EDIT THE PROJECT TITLE HERE -->
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Project Title Goes Here</h1>
+            <p class="text-lg text-gray-600 mb-8">A collection of resources, links, and documents related to this project.</p>
+
+            <!-- EDIT YOUR PROJECT LINKS BELOW -->
+            <div class="space-y-4">
+
+                <!-- EXAMPLE LINK 1: Interactive Map -->
+                <div class="element-link">
+                    <a href="hhttps://graceofcartography.github.io/NewInteractiveIliad.html" target="_blank">
+                        Interactive Web Map
+                    </a>
+                </div>
+
+                <!-- EXAMPLE LINK 2: Data -->
+                <div class="element-link">
+                    <a href="#" target="_blank">
+                        Project Data Repository (on GitHub)
+                    </a>
+                </div>
+
+                <!-- EXAMPLE LINK 3: Written Article -->
+                <div class="element-link">
+                    <a href="#" target="_blank">
+                        Published Article or Blog Post
+                    </a>
+                </div>
+
+                <!-- EXAMPLE LINK 4: Presentation -->
+                <div class="element-link">
+                    <a href="#" target="_blank">
+                        Presentation Slides (Google Slides, PDF, etc.)
+                    </a>
+                </div>
+                
+                <!-- EXAMPLE LINK 5: Source Code -->
+                <div class="element-link">
+                    <a href="#" target="_blank">
+                        Source Code (on GitHub)
+                    </a>
+                </div>
+
+                <!-- TO ADD A NEW LINK:
+                     1. Copy the block below.
+                     2. Paste it above this comment.
+                     3. Change the href="#" to your actual URL.
+                     4. Change the text "New Link Title" to your desired link text.
+
+                <div class="element-link">
+                    <a href="#" target="_blank">
+                        New Link Title
+                    </a>
+                </div>
+                -->
+
+            </div>
+            <!-- END OF EDITABLE LINK SECTION -->
+
+             <!-- Back to projects link -->
+             <div class="mt-12">
+                <a href="projects.html" class="text-green-600 hover:text-green-800 font-medium">&larr; Back to all projects</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer: This is the same footer as your other pages. -->
+    <footer class="py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+        &copy; <span id="currentYear"></span> Charissa Abi. All rights reserved.
+    </footer>
+
+    <script>
+        // This script automatically updates the copyright year.
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
