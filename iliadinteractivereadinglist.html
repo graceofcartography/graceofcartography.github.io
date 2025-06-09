@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iliad Project: An Interactive Reading List</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- D3.js for data visualization -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to complement Tailwind, matched to your website */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Light gray background from your site */
+            color: #343a40; /* Darker text from your site */
+        }
+        h1, h2, h3 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600; /* semibold for headings */
+        }
+        h1 { color: #047857; } /* Main green accent color */
+        h2 { color: #047857; }
+        /* Style for the D3-generated SVG polygons */
+        .category-segment {
+            cursor: pointer;
+            transition: fill 0.3s ease, stroke-width 0.3s ease, stroke 0.3s ease;
+            stroke: #f8f9fa; /* Match body background */
+            stroke-width: 4px;
+        }
+        .category-segment:hover {
+            fill-opacity: 0.9;
+        }
+        .category-segment.active {
+            stroke: #047857; /* Main green accent for selection */
+            stroke-width: 5px;
+        }
+        /* Style for the text labels on the polygons */
+        .category-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            fill: white;
+            text-anchor: middle;
+            pointer-events: none; /* Make text non-interactive */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        /* Style for the sidebar content */
+        #reading-list-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #reading-list-content li {
+            border-left: 3px solid #6ee7b7; /* Lighter green accent (Tailwind green-400) */
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold">The Iliad Project</h1>
+            <p class="text-lg text-gray-600 mt-2">An Interactive Reading List</p>
+        </header>
+
+        <main class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- D3 Visualization Container -->
+            <div id="vis-container" class="w-full lg:w-1/2 flex items-center justify-center">
+                <div id="visualization" class="w-full max-w-2xl aspect-square"></div>
+            </div>
+
+            <!-- Reading List Sidebar -->
+            <aside id="reading-list-sidebar" class="w-full lg:w-1/2 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <div id="reading-list-content">
+                    <h2 class="text-2xl font-bold mb-4">Select a Category</h2>
+                    <p class="text-gray-600">Click on a segment of the hexagon to explore the associated reading list for this project.</p>
+                </div>
+            </aside>
+
+        </main>
+    </div>
+
+    <script>
+        // --- DATA ---
+        // This is where you define your categories and reading lists.
+        const readingData = [
+            {
+                category: "Iliad - Critical Reading",
+                readings: [
+                    { author: "Homer", title: "The Iliad", notes: "Primary text. Focus on character arcs and divine intervention. (Trans. Lattimore)" },
+                    { author: "Seth L. Schein", title: "The Mortal Hero: An Introduction to Homer's Iliad", notes: "Excellent overview of the main themes and character structures." },
+                    { author: "Martin Mueller", title: "The Iliad", notes: "A critical analysis focusing on the poem's structure and oral-formulaic composition." }
+                ]
+            },
+            {
+                category: "Iliad - Literary Review",
+                readings: [
+                    { author: "James M. Redfield", title: "Nature and Culture in the Iliad: The Tragedy of Hector", notes: "Explores the tragic nature of the poem through the figure of Hector." },
+                    { author: "Laura M. Slatkin", title: "The Power of Thetis: Allusion and Interpretation in the Iliad", notes: "Focuses on the role of the gods, particularly Thetis, and the power of divine narrative." }
+                ]
+            },
+            {
+                category: "Literary Cartography & The Women of Iliad",
+                readings: [
+                    { author: "Christiane Sourvinou-Inwood", title: "'Reading' Greek Death to the End of the Classical Period", notes: "While not Iliad-specific, provides methodological frameworks for interpreting space and ritual." },
+                    { author: "Emily Wilson", title: "The Odyssey (Translator's Note)", notes: "Wilson's notes on translating the female experience in the Odyssey offer a valuable lens for the Iliad." },
+                     { author: "Casey Dué", title: "Homeric Variations on a Lament by Briseis", notes: "Analyzes the specific voice and function of Briseis's lament, highlighting female agency." }
+                ]
+            },
+            {
+                category: "History of Women in Ancient Greece",
+                readings: [
+                    { author: "Sarah B. Pomeroy", title: "Goddesses, Whores, Wives, and Slaves: Women in Classical Antiquity", notes: "A foundational text on the social positions and roles of women in the ancient world." },
+                    { author: "Sue Blundell", title: "Women in Ancient Greece", notes: "Provides a comprehensive historical overview, separating myth from historical evidence where possible." }
+                ]
+            },
+            {
+                category: "Homeric Translations & Adaptations",
+                readings: [
+                    { author: "Caroline Alexander", title: "The War That Killed Achilles: The True Story of Homer's Iliad", notes: "A translation and commentary that presents the Iliad as a powerful anti-war epic." },
+                    { author: "Madeline Miller", title: "The Song of Achilles", notes: "A modern fictional adaptation that has significantly influenced contemporary reception of the Iliad." },
+                    { author: "Alice Oswald", title: "Memorial: An Excavation of the Iliad", notes: "An adaptation that strips away the narrative to focus on the deaths of the soldiers, creating a powerful, haunting effect." }
+                ]
+            },
+            {
+                category: "Meta-Critique & Classical Studies",
+                readings: [
+                    { author: "Donna Zuckerberg", title: "Not All Dead White Men", notes: "Examines the reception and misuse of Classics in modern online communities." },
+                    { author: "Mary Beard", title: "Women & Power: A Manifesto", notes: "Traces the silencing of women's voices back to the classical world." }
+                ]
+            }
+        ];
+
+        // --- D3 VISUALIZATION SCRIPT ---
+        const visContainer = d3.select("#visualization");
+        // Ensure the script runs after the element is in the DOM and has a size
+        setTimeout(() => {
+            const { width } = visContainer.node().getBoundingClientRect();
+            const height = width; // Keep it square
+            const svg = visContainer.append("svg")
+                .attr("viewBox", `0 0 ${width} ${height}`)
+                .attr("preserveAspectRatio", "xMidYMid meet");
+
+            const center = { x: width / 2, y: height / 2 };
+            const outerRadius = width / 2.5;
+            const innerRadius = width / 5;
+
+            // A new color scale based on the green from your website
+            const colorScale = d3.scaleOrdinal()
+                .domain(readingData.map(d => d.category))
+                .range(["#064e3b", "#047857", "#059669", "#10b981", "#34d399", "#6ee7b7"].reverse());
+
+            // Function to generate points for one trapezoid segment
+            function generateSegmentPoints(i) {
+                const angle1 = (Math.PI / 3) * i - Math.PI / 2;
+                const angle2 = (Math.PI / 3) * (i + 1) - Math.PI / 2;
+
+                return [
+                    [center.x + outerRadius * Math.cos(angle1), center.y + outerRadius * Math.sin(angle1)],
+                    [center.x + outerRadius * Math.cos(angle2), center.y + outerRadius * Math.sin(angle2)],
+                    [center.x + innerRadius * Math.cos(angle2), center.y + innerRadius * Math.sin(angle2)],
+                    [center.x + innerRadius * Math.cos(angle1), center.y + innerRadius * Math.sin(angle1)],
+                ];
+            }
+            
+            // Group for all visualization elements
+            const g = svg.append("g");
+
+            // Create the segments
+            const segments = g.selectAll("polygon.category-segment")
+                .data(readingData)
+                .enter()
+                .append("polygon")
+                .attr("class", "category-segment")
+                .attr("points", (d, i) => generateSegmentPoints(i).map(p => p.join(",")).join(" "))
+                .attr("fill", d => colorScale(d.category))
+                .on("click", (event, d) => {
+                    segments.classed("active", false);
+                    d3.select(event.currentTarget).classed("active", true);
+                    updateSidebar(d);
+                });
+
+            // Function to wrap text in SVG
+            function wrapText(text, width) {
+                text.each(function () {
+                    var text = d3.select(this),
+                        words = text.text().split(/\s+/).reverse(),
+                        word,
+                        line = [],
+                        lineNumber = 0,
+                        lineHeight = 1.1, // ems
+                        x = text.attr("x"),
+                        y = text.attr("y"),
+                        dy = 0,
+                        tspan = text.text(null)
+                                    .append("tspan")
+                                    .attr("x", x)
+                                    .attr("y", y)
+                                    .attr("dy", dy + "em");
+                    while (word = words.pop()) {
+                        line.push(word);
+                        tspan.text(line.join(" "));
+                        if (tspan.node().getComputedTextLength() > width) {
+                            line.pop();
+                            tspan.text(line.join(" "));
+                            line = [word];
+                            tspan = text.append("tspan")
+                                        .attr("x", x)
+                                        .attr("y", y)
+                                        .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                                        .text(word);
+                        }
+                    }
+                });
+            }
+            
+            // Add text labels to the segments
+            g.selectAll("text.category-label")
+                .data(readingData)
+                .enter()
+                .append("text")
+                .attr("class", "category-label")
+                .attr("x", (d, i) => {
+                    const angle = (Math.PI / 3) * i + (Math.PI / 6) - Math.PI / 2;
+                    const r = (outerRadius + innerRadius) / 2;
+                    return center.x + r * Math.cos(angle);
+                })
+                .attr("y", (d, i) => {
+                    const angle = (Math.PI / 3) * i + (Math.PI / 6) - Math.PI / 2;
+                    const r = (outerRadius + innerRadius) / 2;
+                    return center.y + r * Math.sin(angle);
+                })
+                .attr("dy", "0.35em") // vertical-align middle
+                .text(d => d.category)
+                .call(wrapText, innerRadius * 1.5);
+                
+
+            // --- SIDEBAR UPDATE FUNCTION ---
+            const sidebarContent = d3.select("#reading-list-content");
+
+            function updateSidebar(data) {
+                sidebarContent.html(""); // Clear current content
+
+                sidebarContent.append("h2")
+                    .attr("class", "text-2xl font-bold mb-4")
+                    .text(data.category);
+                
+                const list = sidebarContent.append("ul");
+
+                data.readings.forEach(item => {
+                    const listItem = list.append("li");
+                    
+                    listItem.append("h3")
+                        .attr("class", "text-lg font-semibold text-gray-800")
+                        .text(item.title);
+                    
+                    listItem.append("p")
+                        .attr("class", "text-md text-gray-700 mb-1")
+                        .text(`by ${item.author}`);
+
+                    listItem.append("p")
+                        .attr("class", "text-sm text-gray-600 italic")
+                        .text(item.notes);
+                });
+            }
+
+            // A small fix to ensure visualization renders correctly on load
+        }, 10);
+
+    </script>
+
+</body>
+</html>
