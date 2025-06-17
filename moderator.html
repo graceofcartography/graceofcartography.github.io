@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyscapes - Moderator Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <header class="bg-white shadow-md">
+        <div class="max-w-4xl mx-auto p-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-800">Moderator Panel</h1>
+            <div id="auth-container">
+                <button id="login-btn" class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600">Login with Google</button>
+                <div id="user-info" class="hidden items-center">
+                    <p id="user-email" class="text-sm text-gray-600 mr-4"></p>
+                    <button id="logout-btn" class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="content-area" class="max-w-4xl mx-auto p-4 mt-8">
+        <div id="login-prompt" class="text-center bg-white p-12 rounded-lg shadow">
+            <h2 class="text-xl font-semibold text-gray-700">Please log in to view submissions.</h2>
+        </div>
+
+        <div id="submissions-container" class="hidden">
+            <h2 class="text-2xl font-bold border-b pb-2 mb-4">Pending Submissions</h2>
+            <div id="submissions-list" class="space-y-4">
+                <!-- Submissions will be dynamically inserted here -->
+            </div>
+            <p id="no-submissions" class="hidden text-center text-gray-500 mt-8">No pending submissions.</p>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- 1. CONFIGURATION ---
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        let db, auth;
+
+        // --- 2. DOM ELEMENTS ---
+        const loginBtn = document.getElementById('login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const authContainer = document.getElementById('auth-container');
+        const userInfo = document.getElementById('user-info');
+        const userEmail = document.getElementById('user-email');
+        const loginPrompt = document.getElementById('login-prompt');
+        const submissionsContainer = document.getElementById('submissions-container');
+        const submissionsList = document.getElementById('submissions-list');
+        const noSubmissionsMsg = document.getElementById('no-submissions');
+
+        // --- 3. AUTHENTICATION ---
+        async function setupAuth() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                onAuthStateChanged(auth, user => {
+                    if (user) {
+                        // User is signed in
+                        console.log('User logged in:', user.email);
+                        loginBtn.classList.add('hidden');
+                        userInfo.classList.remove('hidden');
+                        userEmail.textContent = user.email;
+                        loginPrompt.classList.add('hidden');
+                        submissionsContainer.classList.remove('hidden');
+                        fetchSubmissions();
+                    } else {
+                        // User is signed out
+                        console.log('User logged out.');
+                        loginBtn.classList.remove('hidden');
+                        userInfo.classList.add('hidden');
+                        loginPrompt.classList.remove('hidden');
+                        submissionsContainer.classList.add('hidden');
+                        submissionsList.innerHTML = ''; // Clear list on logout
+                    }
+                });
+
+                loginBtn.addEventListener('click', () => {
+                    const provider = new GoogleAuthProvider();
+                    signInWithPopup(auth, provider).catch(error => {
+                        console.error("Login failed:", error);
+                        alert("Login failed. Check the console for details.");
+                    });
+                });
+
+                logoutBtn.addEventListener('click', () => signOut(auth));
+
+            } catch (error) {
+                console.error("Firebase Init Error:", error);
+                alert("Failed to initialize Firebase. Check console.");
+            }
+        }
+        
+        // --- 4. MODERATION LOGIC ---
+        async function fetchSubmissions() {
+            if (!auth.currentUser) return;
+            
+            submissionsList.innerHTML = '<div>Loading submissions...</div>';
+            noSubmissionsMsg.classList.add('hidden');
+
+            try {
+                const submissionsCollection = collection(db, `artifacts/${appId}/public/data/submissions`);
+                const q = query(submissionsCollection, where("status", "==", "pending"));
+                const querySnapshot = await getDocs(q);
+
+                submissionsList.innerHTML = ''; // Clear loading message
+
+                if (querySnapshot.empty) {
+                    noSubmissionsMsg.classList.remove('hidden');
+                } else {
+                    querySnapshot.forEach(doc => {
+                        renderSubmission(doc.id, doc.data());
+                    });
+                }
+            } catch (error) {
+                console.error("Error fetching submissions: ", error);
+                submissionsList.innerHTML = `<div class="text-red-600">Error: ${error.message}. You might not have moderator permissions.</div>`;
+            }
+        }
+
+        function renderSubmission(id, data) {
+            const div = document.createElement('div');
+            div.className = 'bg-white p-6 rounded-lg shadow flex justify-between items-center';
+            div.innerHTML = `
+                <div class="prose">
+                    <p>${data.story}</p>
+                    <small class="text-gray-400">Lat: ${data.location.latitude.toFixed(4)}, Lng: ${data.location.longitude.toFixed(4)}</small>
+                </div>
+                <div class="flex space-x-2">
+                    <button data-id="${id}" class="approve-btn px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600">Approve</button>
+                    <button data-id="${id}" class="reject-btn px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600">Reject</button>
+                </div>
+            `;
+            submissionsList.appendChild(div);
+        }
+
+        async function approveSubmission(id) {
+            console.log(`Approving doc: ${id}`);
+            const submissionRef = doc(db, `artifacts/${appId}/public/data/submissions`, id);
+            // This is a placeholder for the actual data. In a real app, you'd get this data first.
+            const joyscapesRef = doc(db, `artifacts/${appId}/public/data/joyscapes`, id); 
+            
+            // For simplicity, we'll re-fetch the data. A more optimized app could pass it.
+             const subDoc = await getDocs(query(collection(db, `artifacts/${appId}/public/data/submissions`), where("__name__", "==", id)));
+            if (!subDoc.empty) {
+                const dataToApprove = subDoc.docs[0].data();
+                delete dataToApprove.status; // Remove status field before approving
+
+                await setDoc(joyscapesRef, dataToApprove); // Copy to public collection
+                await deleteDoc(submissionRef); // Delete from submissions
+                fetchSubmissions(); // Refresh the list
+            }
+        }
+
+        async function rejectSubmission(id) {
+            console.log(`Rejecting doc: ${id}`);
+            const submissionRef = doc(db, `artifacts/${appId}/public/data/submissions`, id);
+            await deleteDoc(submissionRef);
+            fetchSubmissions(); // Refresh the list
+        }
+        
+        // --- 5. EVENT LISTENERS ---
+        submissionsList.addEventListener('click', (e) => {
+            const target = e.target;
+            const id = target.dataset.id;
+            if (!id) return;
+
+            if (target.classList.contains('approve-btn')) {
+                target.disabled = true;
+                target.textContent = '...';
+                approveSubmission(id);
+            } else if (target.classList.contains('reject-btn')) {
+                target.disabled = true;
+                target.textContent = '...';
+                rejectSubmission(id);
+            }
+        });
+
+        // --- 6. INITIALIZE ---
+        setupAuth();
+
+    </script>
+</body>
+</html>
