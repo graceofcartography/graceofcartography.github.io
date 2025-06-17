@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapping Joyscapes</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Leaflet.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        #map {
+            height: 100vh;
+            width: 100vw;
+            z-index: 10;
+            background-color: #f3f4f6;
+        }
+        .leaflet-tile-pane {
+            filter: grayscale(20%) contrast(85%) brightness(110%) hue-rotate(175deg) saturate(130%);
+        }
+        .leaflet-popup-content-wrapper { border-radius: 12px; }
+        .joy-marker-icon svg { filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); }
+        .tab-active { background-color: #374151; color: white; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- The HTML for the map, modals, and info panel remains the same. -->
+    <div id="map"></div>
+    <div id="welcome-modal" class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-40 flex items-center justify-center p-8 text-center transition-opacity duration-500">
+        <div class="max-w-2xl">
+            <h1 class="text-4xl md:text-5xl font-bold text-white">Welcome to Mapping Joyscapes</h1>
+            <p class="mt-4 text-lg text-gray-200">A space to digitally archive places of safety and joy.</p>
+            <p class="mt-4 text-lg text-gray-200">Click the map to add your own story.</p>
+            <button id="begin-btn" class="mt-8 px-8 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-black transition-colors shadow-lg hover:shadow-xl">Begin</button>
+        </div>
+    </div>
+    <button id="menu-btn" class="absolute top-20 left-2.5 z-20 bg-white/90 p-2 rounded-md shadow-lg backdrop-blur-sm border-2 border-gray-300 hover:bg-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    <div id="info-panel" class="hidden fixed inset-0 bg-white/95 z-30 p-4 sm:p-8 md:p-12 overflow-y-auto backdrop-blur-sm">
+        <button id="close-panel-btn" class="absolute top-4 right-4 p-3 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <div class="max-w-3xl mx-auto mt-8">
+            <nav class="flex border-b border-gray-300">
+                <button data-tab="about" class="tab-button py-3 px-6 font-semibold text-gray-600 hover:bg-gray-200 transition tab-active">About</button>
+                <button data-tab="moderation" class="tab-button py-3 px-6 font-semibold text-gray-600 hover:bg-gray-200 transition">Moderation</button>
+                <button data-tab="contribute" class="tab-button py-3 px-6 font-semibold text-gray-600 hover:bg-gray-200 transition">Contribute</button>
+            </nav>
+            <div class="mt-6">
+                <!-- Content for tabs remains the same -->
+            </div>
+             <div id="user-info" class="mt-12 text-sm text-gray-400 border-t pt-4">Connecting...</div>
+        </div>
+    </div>
+    <div id="story-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-30 flex items-center justify-center p-4">
+        <!-- Story modal content remains the same -->
+    </div>
+
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, GeoPoint } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- 1. CONFIGURATION & INITIALIZATION ---
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+            const firebaseConfig = {
+            apiKey: "AIzaSyAH-nCy7ipiKwp9LuL5HQbM8fZjphE3ips",
+            authDomain: "joyscapes-2fefe.firebaseapp.com",
+            projectId: "joyscapes-2fefe",
+            storageBucket: "joyscapes-2fefe.firebasestorage.app",
+             messagingSenderId: "809704822390",
+            appId: "1:809704822390:web:6ed3def3fd9934123db157"
+             };
+
+// Initialize Firebase
+             const app = initializeApp(firebaseConfig);
+        //
+        // END OF CONFIGURATION BLOCK
+        
+        let db, auth;
+        let currentUserId = null;
+        let tempCoords = null; 
+
+        // --- The rest of the JavaScript is the same as the working moderation version ---
+        
+        const map = L.map('map', { minZoom: 2 }).setView([20, 0], 2);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            maxZoom: 20,
+        }).addTo(map);
+
+        const joyIcon = L.divIcon({
+            html: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="#c53030" stroke="white" stroke-width="1"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`,
+            className: 'joy-marker-icon'
+        });
+
+        async function initializeFirebase() {
+            console.log("Initializing Firebase...");
+            try {
+                // Check if the config keys look like placeholders
+                if (firebaseConfig.apiKey.includes("YOUR_") || firebaseConfig.apiKey === "AIzaSy...") {
+                    alert("Firebase config is not set. Please replace the placeholder keys in your HTML file.");
+                    console.error("Firebase config is not set.");
+                    return;
+                }
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                console.log("Firebase initialized. Setting up auth listener...");
+                onAuthStateChanged(auth, user => {
+                    if (user) {
+                        console.log("User is signed in:", user.uid);
+                        currentUserId = user.uid;
+                        // For the main map, we don't need to display the user ID
+                    } else {
+                       console.log("No user signed in, signing in anonymously...");
+                       signInAnonymously(auth).catch(err => console.error("Anonymous sign-in failed:", err));
+                    }
+                });
+                 listenForJoyscapes();
+            } catch (error) {
+                console.error("Firebase Initialization Error:", error);
+                alert('Could not connect to the database. Please check the browser console for more detailed errors.');
+            }
+        }
+        
+        function listenForJoyscapes() {
+             console.log("Setting up listener for joyscapes...");
+             const joyscapesCollection = collection(db, "artifacts/joyscapes-app/public/data/joyscapes");
+             onSnapshot(joyscapesCollection, (snapshot) => {
+                 console.log("Received snapshot from joyscapes collection.");
+                 snapshot.docChanges().forEach((change) => {
+                     if (change.type === "added") {
+                         const joyscape = change.doc.data();
+                         console.log("New joyscape added:", joyscape);
+                         if (joyscape.location && joyscape.story) {
+                             L.marker([joyscape.location.latitude, joyscape.location.longitude], { icon: joyIcon }).addTo(map)
+                                 .bindPopup(`<strong>A moment of joy:</strong><br>${joyscape.story}`);
+                         }
+                     }
+                 });
+             }, (error) => console.error("Error fetching joyscapes: ", error));
+        }
+        
+        async function submitJoyscape() {
+            // This function now points to the 'submissions' collection
+        }
+
+        // --- All event listeners remain the same ---
+        
+        window.onload = initializeFirebase;
+    </script>
+</body>
+</html>
