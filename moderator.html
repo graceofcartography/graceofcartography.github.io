@@ -42,18 +42,27 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, query, where, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- 1. CONFIGURATION ---
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        //
+        // IMPORTANT: PASTE YOUR REAL FIREBASE CONFIG OBJECT HERE
+        //
+        const firebaseConfig = {
+          apiKey: "AIzaSyAH-nCy7ipiKwp9LuL5HQbM8fZjphE3ips",
+          authDomain: "joyscapes-2fefe.firebaseapp.com",
+          projectId: "joyscapes-2fefe",
+          storageBucket: "joyscapes-2fefe.firebasestorage.app",
+          messagingSenderId: "809704822390",
+          appId: "1:809704822390:web:6ed3def3fd9934123db157"
+        };
+        const appId = "joyscapes-app"; 
 
         let db, auth;
 
         // --- 2. DOM ELEMENTS ---
         const loginBtn = document.getElementById('login-btn');
         const logoutBtn = document.getElementById('logout-btn');
-        const authContainer = document.getElementById('auth-container');
         const userInfo = document.getElementById('user-info');
         const userEmail = document.getElementById('user-email');
         const loginPrompt = document.getElementById('login-prompt');
@@ -64,14 +73,17 @@
         // --- 3. AUTHENTICATION ---
         async function setupAuth() {
             try {
+                if (firebaseConfig.apiKey.includes("...")) {
+                    // This alert is the reason you see the error. It's a safety check.
+                    alert("Firebase config is not set. Please replace the placeholder keys in your moderator.html file.");
+                    return;
+                }
                 const app = initializeApp(firebaseConfig);
                 auth = getAuth(app);
                 db = getFirestore(app);
 
                 onAuthStateChanged(auth, user => {
                     if (user) {
-                        // User is signed in
-                        console.log('User logged in:', user.email);
                         loginBtn.classList.add('hidden');
                         userInfo.classList.remove('hidden');
                         userEmail.textContent = user.email;
@@ -79,13 +91,11 @@
                         submissionsContainer.classList.remove('hidden');
                         fetchSubmissions();
                     } else {
-                        // User is signed out
-                        console.log('User logged out.');
                         loginBtn.classList.remove('hidden');
                         userInfo.classList.add('hidden');
                         loginPrompt.classList.remove('hidden');
                         submissionsContainer.classList.add('hidden');
-                        submissionsList.innerHTML = ''; // Clear list on logout
+                        submissionsList.innerHTML = '';
                     }
                 });
 
@@ -117,7 +127,7 @@
                 const q = query(submissionsCollection, where("status", "==", "pending"));
                 const querySnapshot = await getDocs(q);
 
-                submissionsList.innerHTML = ''; // Clear loading message
+                submissionsList.innerHTML = ''; 
 
                 if (querySnapshot.empty) {
                     noSubmissionsMsg.classList.remove('hidden');
@@ -128,19 +138,19 @@
                 }
             } catch (error) {
                 console.error("Error fetching submissions: ", error);
-                submissionsList.innerHTML = `<div class="text-red-600">Error: ${error.message}. You might not have moderator permissions.</div>`;
+                submissionsList.innerHTML = `<div class="text-red-600 p-4 bg-red-100 rounded-lg">Error: ${error.message}. You might not have moderator permissions. Please check your Firebase Rules.</div>`;
             }
         }
 
         function renderSubmission(id, data) {
             const div = document.createElement('div');
-            div.className = 'bg-white p-6 rounded-lg shadow flex justify-between items-center';
+            div.className = 'bg-white p-6 rounded-lg shadow flex justify-between items-center gap-4';
             div.innerHTML = `
-                <div class="prose">
+                <div class="prose max-w-none flex-grow">
                     <p>${data.story}</p>
                     <small class="text-gray-400">Lat: ${data.location.latitude.toFixed(4)}, Lng: ${data.location.longitude.toFixed(4)}</small>
                 </div>
-                <div class="flex space-x-2">
+                <div class="flex-shrink-0 flex space-x-2">
                     <button data-id="${id}" class="approve-btn px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600">Approve</button>
                     <button data-id="${id}" class="reject-btn px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600">Reject</button>
                 </div>
@@ -149,28 +159,35 @@
         }
 
         async function approveSubmission(id) {
-            console.log(`Approving doc: ${id}`);
             const submissionRef = doc(db, `artifacts/${appId}/public/data/submissions`, id);
-            // This is a placeholder for the actual data. In a real app, you'd get this data first.
             const joyscapesRef = doc(db, `artifacts/${appId}/public/data/joyscapes`, id); 
             
-            // For simplicity, we'll re-fetch the data. A more optimized app could pass it.
-             const subDoc = await getDocs(query(collection(db, `artifacts/${appId}/public/data/submissions`), where("__name__", "==", id)));
-            if (!subDoc.empty) {
-                const dataToApprove = subDoc.docs[0].data();
-                delete dataToApprove.status; // Remove status field before approving
+            try {
+                const subDoc = await getDoc(submissionRef);
+                if (subDoc.exists()) {
+                    const dataToApprove = subDoc.data();
+                    delete dataToApprove.status; 
 
-                await setDoc(joyscapesRef, dataToApprove); // Copy to public collection
-                await deleteDoc(submissionRef); // Delete from submissions
-                fetchSubmissions(); // Refresh the list
+                    await setDoc(joyscapesRef, dataToApprove);
+                    await deleteDoc(submissionRef); 
+                    fetchSubmissions(); 
+                } else {
+                    console.log("Document to approve not found.");
+                    fetchSubmissions();
+                }
+            } catch (error) {
+                console.error("Error approving submission: ", error);
             }
         }
 
         async function rejectSubmission(id) {
-            console.log(`Rejecting doc: ${id}`);
             const submissionRef = doc(db, `artifacts/${appId}/public/data/submissions`, id);
-            await deleteDoc(submissionRef);
-            fetchSubmissions(); // Refresh the list
+            try {
+                await deleteDoc(submissionRef);
+                fetchSubmissions();
+            } catch (error) {
+                console.error("Error rejecting submission: ", error);
+            }
         }
         
         // --- 5. EVENT LISTENERS ---
@@ -179,13 +196,12 @@
             const id = target.dataset.id;
             if (!id) return;
 
+            target.disabled = true;
+            target.textContent = '...';
+
             if (target.classList.contains('approve-btn')) {
-                target.disabled = true;
-                target.textContent = '...';
                 approveSubmission(id);
             } else if (target.classList.contains('reject-btn')) {
-                target.disabled = true;
-                target.textContent = '...';
                 rejectSubmission(id);
             }
         });
