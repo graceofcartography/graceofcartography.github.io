@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Learning Shelf</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        /* Styles for the floating panel */
+        #sidePanel {
+            display: none; /* Hidden by default */
+            position: fixed; /* Floats over the page content */
+            z-index: 1000;
+        }
+
+        #sidePanel.open {
+            display: flex; /* Show the panel */
+        }
+
+        /* The header of the panel is the drag handle */
+        #panelHeader {
+            cursor: move;
+            user-select: none; /* Prevents text selection while dragging */
+        }
+        
+        #closePanelBtn {
+            cursor: pointer;
+        }
+        
+        /* --- Image & SVG Styles --- */
+        .responsive-img-container {
+            position: relative;
+        }
+        .responsive-img-container img {
+            width: 100%;
+            height: auto;
+            min-height: 200px;
+            display: block;
+        }
+        .svg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .clickable-object {
+            fill: transparent;
+            cursor: pointer;
+            transition: fill 0.3s ease;
+            stroke: none;
+        }
+         .clickable-object:hover {
+              stroke: #D98DB3;
+              stroke-width: 2px;
+             filter: url(#glow);
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <div class="flex-grow flex flex-col items-center justify-center p-4">
+        <h1 class="text-3xl md:text-4xl font-bold text-green-800 mb-8 text-center rounded-lg bg-white p-4 shadow-md">
+            Digi-Shelf
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 mb-6 text-center max-w-2xl">
+            This is a digital "bookshelf" of all the things I have read, watched, encountered, etc., that I have genuinely enjoyed engaging with. Think of it as an interactive recommendation list. Hover and click over any of the objects on the shelf to pull up the associated info. I mostly read books and essays nowadays so I'd recommend you check out the pile of books and the ink pot first! Updated monthly!
+        </p>
+        <div class="responsive-img-container bg-white rounded-lg shadow-xl p-6 overflow-hidden max-w-7xl mx-auto">
+            <img src="Image-2.png" alt="Learning Shelf" class="rounded-lg"
+                 onerror="this.onerror=null;this.src='https://placehold.co/1280x413/cccccc/000000?text=Image+Not+Loaded';this.alt='Placeholder Image - Original Not Loaded';">
+
+            <svg class="svg-overlay" viewBox="0 0 960 310" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                 <g transform="scale(0.35) translate(75, 60)">
+                    <path id="area-books" class="clickable-object" d="M310.339 116V527H401.083L401.3 526.887L486.8 482.387L486.953 482.308L487.07 482.182L541.555 423.697L593.042 372.711L593.339 372.417V225.107L678.304 181.143L752.339 225.069V423.517L752.76 423.815L835.145 482.233L898.529 560.853V734H31.2744L1.01855 274.513L31.1641 225.066L65.5498 180.714L123.262 136.435L225.936 116H310.339Z"/>
+                    <path id="area-globe" class="clickable-object" d="M1223.34 116L1335.6 153.421L1444.24 211.227L1476.5 279.722V362.89L1444.06 507.623L1389.82 597.688L1314.14 626.565L1313.32 626.881L1313.53 627.738L1334.72 714H1094.36L1115.29 646.813L1180.27 628.462L1182.36 627.872L1180.55 626.668L1093.58 568.684L1010.27 507.324L974.5 442.244V337.638L1010.39 211.039L1071.58 153.33L1147.73 116H1223.34Z"/>
+                    <rect id="area-brown-book" class="clickable-object" x="1508" y="173" width="398" height="541"/>
+                    <path id="area-tv" class="clickable-object" d="M2129.61 279.958L2130.2 281.101L2131.16 280.249L2196.2 222.657L2267.5 251.177V301.779L2267.64 302.018L2289.14 337.518L2289.21 337.631L2289.31 337.722L2350 395.926V579.859L2311.58 597.592L2311.26 597.739L2311.11 598.053L2289.38 641.5H2040.54L2011.83 597.949L2011.54 597.5H1953.59L1975.92 338H2040.52L2040.82 337.576L2065.82 302.076L2066.27 301.431L2065.75 300.838L1976.59 199.795L2064.57 153.852L2129.61 279.958Z"/>
+                    <path id="area-inkwell-quill" class="clickable-object" d="M2768.17 1L2787.48 104.994L2768.05 203.664L2738.12 260.031L2738.08 260.092L2738.06 260.156L2713.58 327.093L2682.85 384.094L2614.83 395.514L2614.2 395.621L2614.03 396.247L2605.53 428.747L2605.5 428.871V489.822L2605.69 490.084L2635.03 530.859L2643.41 629.5H2416.11L2425.96 530.964L2468.19 490.22L2468.5 489.925V416.312L2489.82 385.57L2490.06 385.232L2489.99 384.829L2480.05 327.69L2519.34 261.044L2558.32 204.568L2586.29 168.108L2586.39 167.977L2586.45 167.818L2607.35 105.604L2645.11 76.29L2645.29 76.1543L2645.39 75.959L2684.11 1H2768.17Z"/>
+                </g>
+            </svg>
+        </div>
+                     <div class="mt-12">
+                <a href="index.html" class="text-green-600 hover:text-green-800 font-medium">&larr; Back to home</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer: This is the same footer as your other pages. -->
+    <footer class="py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+        &copy; <span id="currentYear"></span> Charissa Abi. All rights reserved.
+    </footer>
+    </div>
+
+    <!-- Side Panel -->
+    <div id="sidePanel" class="top-5 right-5 h-auto md:w-1/3 lg:w-1/4 bg-white shadow-2xl p-6 rounded-lg flex-col" style="max-height: calc(100vh - 40px);">
+        <!-- Panel Header -->
+        <div id="panelHeader" class="flex justify-between items-center mb-6 border-b pb-4 flex-shrink-0">
+            <h2 id="panelTitle" class="text-2xl font-semibold text-gray-800"></h2>
+            <button id="closePanelBtn" class="p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                <svg class="w-6 h-6 text-gray-600 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <!-- Scrollable Content Area -->
+        <div class="flex-grow overflow-y-auto">
+            <p id="panelDescription" class="text-gray-700 mb-6 leading-relaxed"></p>
+            <h3 class="text-xl font-medium text-gray-800 mb-3"></h3>
+            <ul id="readingList" class="list-disc pl-5 space-y-2 text-gray-600"></ul>
+        </div>
+    </div>
+
+    <script>
+        // --- DOM Element References ---
+        const sidePanel = document.getElementById('sidePanel');
+        const closePanelBtn = document.getElementById('closePanelBtn');
+        const panelHeader = document.getElementById('panelHeader');
+        const panelTitle = document.getElementById('panelTitle');
+        const panelDescription = document.getElementById('panelDescription');
+        const readingList = document.getElementById('readingList');
+
+        // --- Data for each clickable area ---
+        const contentData = {
+            'area-books': { title: 'Literary Adventures', description: 'Books I am reading/have read.', readings: ['<a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.goodreads.com/book/show/2214574.Lavinia&ved=2ahUKEwj5vLaDoouOAxXbD1kFHTMlCpYQFnoECBoQAQ&usg=AOvVaw1egXTIe0qHq_uqbsn58cWQ" target="_blank" class="text-blue-600 hover:underline">Lavinia by Ursula K. Le Guin</a>. I must admit that I have been stuck on this one. I keep starting and then forgetting to continue. But it is in my "currently reading" collection on Kindle, so?', '<a href="https://www.goodreads.com/book/show/20564.The_Mill_on_the_Floss" target="_blank" class="text-blue-600 hover:underline">The Mill on the Floss by George Eliot</a>. So far, this has been an incredibly fun read. I bought a second-hand copy a week ago to annotate as I read and most of my annotations are just "LOL". George Eliot definitely knows how to write humour. I enjoy that so much of said humour comes from incredibly incisive observations of human tendencies and personal idiosyncrasies. It\'s not the quips in the dialogue but rather, the description of character motivations and inclinations that have made me laugh so much thus far. Feels like Austen.'] },
+            'area-globe': { title: 'Facts and Feelings', description: 'News articles and other sources of more real-time information.', readings: ['Nothing to note for this June (so far)!'] },
+            'area-brown-book': { title: 'Memes, Posts, Discussions.', description: 'Things that have made me laugh or think that I found on the internet (short form stuff only).', readings: ['Nothing to note for this June (so far)!'] },
+            'area-tv': { title: 'Audio-Visual Media', description: 'Movies, TV shows, Videos.', readings: ['<a href="https://ondisneyplus.disney.com/show/andor" target="_blank" class="text-blue-600 hover:underline">Andor Season 2</a>'] },
+            'area-inkwell-quill': { title: 'People, their work and in their own words', description: 'I read a lot of essays and research papers that I want to share (I just have so many newsletter subscriptions!).', readings: ['<a href="https://www.experimental-history.com/p/face-it-youre-a-crazy-person?utm_source=post-email-title&publication_id=656797&post_id=166676460&utm_campaign=email-post-title&isFreemail=true&r=58vd37&triedRedirect=true&utm_medium=email" target="_blank" class="text-blue-600 hover:underline">Face it: you\'re a crazy person by Adam Mastroianni</a>', '<a href="https://www.themarginalian.org/2025/06/19/elias-canetti-against-death/?mc_cid=c3e50bcd3f&mc_eid=e7108e9ba7" target="_blank" class="text-blue-600 hover:underline">Against Death: Nobel Laureate Elias Canetti on Grieving a Parent, Grieving the World, and What Makes Life Worth Living by Maria Popova (The Marginalian is SO AMAZING)</a>', '<a href="https://www.forkingpaths.co/p/the-evolution-of-dogs?utm_source=post-email-title&publication_id=1184530&post_id=166058896&utm_campaign=email-post-title&isFreemail=true&r=58vd37&triedRedirect=true&utm_medium=email" target="_blank" class="text-blue-600 hover:underline">The Evolution of Modern Dogs by Brian Klass (This was my favourite read)</a>', '<a href="https://aeon.co/essays/why-alien-languages-could-be-far-stranger-than-we-imagine", target="_blank" class="text-blue-600 hover:underline">Against Death: Nobel Laureate Elias Canetti on Grieving a Parent, Grieving the World, and What Makes Life Worth Living by Maria Popova (The Marginalian is SO AMAZING)</a>', '<a href="https://www.forkingpaths.co/p/the-evolution-of-dogs?utm_source=post-email-title&publication_id=1184530&post_id=166058896&utm_campaign=email-post-title&isFreemail=true&r=58vd37&triedRedirect=true&utm_medium=email" target="_blank" class="text-blue-600 hover:underline">Extraterrestrial tongues by Nikhil Mahant (Super cool article)</a>','<a href="https://aeon.co/essays/why-pale-blue-dot-generates-feelings-of-cosmic-insignificance" target="_blank" class="text-blue-600 hover:underline">Just a pale blue dot</a>', '<a href="https://aeon.co/essays/who-needs-ai-text-generation-when-theres-erasmus-of-rotterdam" target="_blank" class="text-blue-600 hover:underline">Methodical banality</a>. I actually disagreed quite a bit about many points in this article. Maybe I should write a response piece?.', '<a href="https://aeon.co/essays/how-is-it-possible-to-be-loved-and-yet-to-feel-deeply-lonely" target="_blank" class="text-blue-600 hover:underline">Loved, yet lonely</a>. Sadly relevant to my circumstances right now. A little embarassing to relate to.'] },
+        };
+
+        // --- Panel Logic ---
+
+        /**
+         * Opens the side panel and populates it with content based on the clicked area's ID.
+         * @param {string} id - The ID of the clicked SVG shape.
+         */
+        function openSidePanel(id) {
+            const data = contentData[id];
+            if (data) {
+                panelTitle.textContent = data.title;
+                panelDescription.textContent = data.description;
+                readingList.innerHTML = ''; // Clear previous list
+                data.readings.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = item; // Using innerHTML to render the links
+                    readingList.appendChild(li);
+                });
+                sidePanel.classList.add('open');
+            }
+        }
+
+        /**
+         * Closes the side panel.
+         */
+        function closeSidePanel() {
+            sidePanel.classList.remove('open');
+        }
+
+        // Add click listener to the close button.
+        closePanelBtn.addEventListener('click', closeSidePanel);
+        
+        // Add click listeners to all clickable SVG shapes.
+        document.querySelectorAll('.clickable-object').forEach(shape => {
+            shape.addEventListener('click', (event) => {
+                openSidePanel(event.target.id);
+            });
+        });
+
+        // --- Draggable Panel Logic ---
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        /**
+         * Initiates dragging for the panel.
+         * @param {MouseEvent|TouchEvent} e - The mouse or touch event.
+         */
+        const startDrag = (e) => {
+            // Prevents dragging if the close button itself is the target.
+            if (e.target.closest('#closePanelBtn')) {
+                return;
+            }
+
+            isDragging = true;
+            // Use touch coordinates if available, otherwise use mouse coordinates.
+            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+            
+            const rect = sidePanel.getBoundingClientRect();
+            offsetX = clientX - rect.left;
+            offsetY = clientY - rect.top;
+
+            // Switch from 'right' to 'left'/'top' positioning for dragging.
+            sidePanel.style.right = 'auto'; 
+            
+            // Prevent default drag behavior. Passive: false is needed for touchmove.
+            e.preventDefault();
+
+            // Add move and up/end listeners to the whole document.
+            document.addEventListener('mousemove', dragMove);
+            document.addEventListener('touchmove', dragMove, { passive: false });
+            document.addEventListener('mouseup', stopDrag);
+            document.addEventListener('touchend', stopDrag);
+        };
+
+        /**
+         * Handles the movement of the panel while dragging.
+         * @param {MouseEvent|TouchEvent} e - The mouse or touch event.
+         */
+        const dragMove = (e) => {
+            if (!isDragging) return;
+            // This is necessary to prevent scrolling the page on mobile while dragging.
+            if (e.type === 'touchmove') e.preventDefault();
+
+            const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+            
+            let newLeft = clientX - offsetX;
+            let newTop = clientY - offsetY;
+
+            // Constrain panel movement to within the viewport.
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const panelWidth = sidePanel.offsetWidth;
+            const panelHeight = sidePanel.offsetHeight;
+
+            if (newLeft < 0) newLeft = 0;
+            if (newTop < 0) newTop = 0;
+            if (newLeft + panelWidth > viewportWidth) newLeft = viewportWidth - panelWidth;
+            if (newTop + panelHeight > viewportHeight) newTop = viewportHeight - panelHeight;
+            
+            sidePanel.style.left = `${newLeft}px`;
+            sidePanel.style.top = `${newTop}px`;
+        };
+
+        /**
+         * Stops the dragging process and cleans up event listeners.
+         */
+        const stopDrag = () => {
+            isDragging = false;
+            document.removeEventListener('mousemove', dragMove);
+            document.removeEventListener('touchmove', dragMove);
+            document.removeEventListener('mouseup', stopDrag);
+            document.removeEventListener('touchend', stopDrag);
+        };
+
+        // Attach mousedown/touchstart listeners to the panel's header to initiate dragging.
+        panelHeader.addEventListener('mousedown', startDrag);
+        panelHeader.addEventListener('touchstart', startDrag, { passive: false });
+    </script>
+</body>
+</html>
