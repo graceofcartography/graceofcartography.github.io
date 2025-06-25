@@ -113,25 +113,8 @@
 </head>
 <body class="flex flex-col">
 
-    <header class="py-6 px-4 sm:px-6 lg:px-8">
-        <div class="container mx-auto flex justify-between items-center">
-            <div>
-                <a class="text-2xl font-bold text-green-700">Charissa Abi</a>
-                <p class="text-sm text-gray-600"> People. Place. Stories.</p>
-            </div>
-            <nav class="space-x-4">
-                <a href="index.html" class="text-gray-600 hover:text-green-600 transition-colors">Home</a>
-                <a href="projects.html" class="text-gray-600 hover:text-green-600 transition-colors">Projects</a>
-                <a href="https://www.linkedin.com/in/charisab/" class="text-gray-600 hover:text-green-600 transition-colors">LinkedIn</a>
-                <a href="substack.html" class="text-gray-600 hover:text-green-600 transition-colors">Substack</a>
-                <a href="#youtube" class="text-gray-600 hover:text-green-600 transition-colors">YouTube</a>
-                <a href="time-rope.html" class="nav-active">Time Rope</a> 
-            </nav>
-        </div>
-    </header>
-
     <main class="flex-grow container mx-auto px-4 py-8">
-        <div class="text-center mb-10 -mt-10">
+        <div class="text-center mb-10">
             <h1 class="text-4xl font-bold text-green-700">Post-Master's Time Rope</h1>
             <p class="text-lg text-gray-500 mt-2">Hover over a strand for details. Click a strand to view associated readings on the right.</p>
         </div>
@@ -356,11 +339,17 @@
         </div>
         
         <div id="tooltip"></div>
-    </main>
+                     <div class="mt-12">
+                <a href="projects.html" class="text-green-600 hover:text-green-800 font-medium">&larr; Back to all projects</a>
+            </div>
 
-    <footer class="py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm mt-auto">
+        </div>
+    </main>
+      <!-- Footer: This is the same footer as your other pages. -->
+    <footer class="py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
         &copy; <span id="currentYear"></span> Charissa Abi. All rights reserved.
     </footer>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
