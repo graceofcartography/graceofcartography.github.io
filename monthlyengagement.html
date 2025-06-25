@@ -37,7 +37,7 @@
         
         /* --- Image & SVG Styles --- */
         .responsive-img-container {
-            position: relative;
+            position: relative; /* This is crucial for absolute positioning of children */
         }
         .responsive-img-container img {
             width: 100%;
@@ -63,18 +63,47 @@
               stroke-width: 2px;
              filter: url(#glow);
         }
+
+        /* Info Box Styles */
+        .info-box {
+            position: absolute; /* Changed from fixed to absolute */
+            top: 20px;   /* Adjusted position relative to the image container */
+            left: 20px;  /* Adjusted position relative to the image container */
+            background-color: #38a169; /* Green-800 from Tailwind */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 999; /* Ensure it's above other content but below the side panel */
+            animation: pulse-glow 2s infinite alternate; /* Apply the animation */
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 5px rgba(56, 161, 105, 0.7), 0 0 10px rgba(56, 161, 105, 0.5);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(56, 161, 105, 1), 0 0 25px rgba(56, 161, 105, 0.8);
+                transform: scale(1.02);
+            }
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
     <div class="flex-grow flex flex-col items-center justify-center p-4">
         <h1 class="text-3xl md:text-4xl font-bold text-green-800 mb-8 text-center rounded-lg bg-white p-4 shadow-md">
-            Digi-Shelf
+            Digi-Shelf for June
         </h1>
-        <p class="text-lg md:text-xl text-gray-600 mb-6 text-center max-w-2xl">
-            This is a digital "bookshelf" of all the things I have read, watched, encountered, etc., that I have genuinely enjoyed engaging with. Think of it as an interactive recommendation list. Hover and click over any of the objects on the shelf to pull up the associated info. I mostly read books and essays nowadays so I'd recommend you check out the pile of books and the ink pot first! Updated monthly!
-        </p>
         <div class="responsive-img-container bg-white rounded-lg shadow-xl p-6 overflow-hidden max-w-7xl mx-auto">
-            <img src="https://raw.githubusercontent.com/graceofcartography/graceofcartography.github.io/refs/heads/main/images/digishelf.png" alt="Learning Shelf" class="rounded-lg"
+            <!-- Info Box - Moved inside the image container -->
+            <div id="infoBox" class="info-box">
+                Hover and click for more details.
+            </div>
+
+            <img src="digishelf.png" alt="Learning Shelf" class="rounded-lg"
                  onerror="this.onerror=null;this.src='https://placehold.co/1280x413/cccccc/000000?text=Image+Not+Loaded';this.alt='Placeholder Image - Original Not Loaded';">
 
             <svg class="svg-overlay" viewBox="0 0 960 310" preserveAspectRatio="xMidYMid meet">
@@ -96,6 +125,10 @@
                 </g>
             </svg>
         </div>
+
+<p class="text-lg md:text-xl text-gray-600 mb-6 mt-10 text-center max-w-2xl">
+            This is a digital "bookshelf" of all the things I have read, watched, encountered, and genuinely enjoyed engaging with (whether that was positively or negatively). I mostly read books and essays nowadays so I'd recommend you check out the pile of books and the ink pot first! Updated monthly!
+        </p>
                      <div class="mt-12">
                 <a href="index.html" class="text-green-600 hover:text-green-800 font-medium">&larr; Back to home</a>
             </div>
