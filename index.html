@@ -41,15 +41,34 @@
             padding: 4px 8px;
             border-radius: 0.25rem;
             font-size: 0.75rem; /* Smaller font size for the overlay text */
-        }
+}
+       .handwritten {
+            font-family: Times New Roman;
+            font-size: 20px;
+            }
+       .emphasis {
+            text-shadow: 1px 1px 1px mistyrose,
+	  	         3px 3px 8px navajowhite;
+            color: firebrick
+      }
+   .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+ }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
+<div class="fixed top-0 left-0 w-full h-screen bg-[url('images/indexbackground.png')] bg-cover bg-center -z-10"></div>')] bg-cover bg-center -z-10"></div>
+
 
     <header class="py-6 px-4 sm:px-6 lg:px-8">
         <div class="container mx-auto flex justify-between items-center">
             <div>
-                <a class="text-2xl font-bold text-green-700">Charissa Abi</a>
+                <a class="text-2xl font-family: Times New Roman font-bold text-green-700">Charissa Abi</a>
                 <p class="text-sm text-gray-600"> People. Place. Stories.</p>
             </div>
             <nav class="space-x-4">
@@ -63,50 +82,83 @@
         </div>
     </header>
 
-    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="space-y-10 max-w-3xl mx-auto">
 
-            <section class="bg-white p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-semibold text-green-700 mb-3">Positionality & Background</h2>
-                <p class="text-gray-700 leading-relaxed">
-                    More to come!
+
+<main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="space-y-10 max-w-3xl mx-auto">
+
+        <div class="bg-white p-4 rounded-xl shadow-2xl">
+            <section class="bg-orange-50 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-family: Times New Roman font-bold text-green-900 mb-3">Purpose and Vision</h2>
+                <p class="text-gray-700 handwritten">
+                    This site was originally meant to be a bare-bones portfolio site to show potential employers that I could make maps and do spatial analysis projects; overall, just an opportunity to show off my 
+                    GIS skills. However, in the process of putting this site together (as well as planning and attempting to execute my various project ideas), it's become much more than a simple portfolio. Now, 
+                    don't get me wrong: potential employers are still welcome! But this is much more about showcasing my learning, creative and intellectual pursuits, and presenting them to a wider audience (who are hopefully interested in more than just applauding skilful demonstration of my technical skills). I want to use this site as a window into my engagement with whatever parts of the world (and her people) catch my eye and mind - spanning from air pollution trends over the years to my ever expanding carto-research project on the Iliad and its world (it's like a balloon expanding inside my brain and I'm hoping I'll be done before it pops. Fingers crossed).
                 </p>
+                <br>
+                <br>	
+                <p class="handwritten"> 
+                    I want this site to provide a multi-media <span class="emphasis">experience,</span> where my output and your engagement can take many forms. That means you can look forward to: beautiful, artistic maps to illustrate my historical or literary projects; interactive web maps and apps that provide detailed and dynamic spatial information as well as allowing for collaboration through participatory web GIS projects like my mapping joyscapes web app. I want this to be all that and more! So much more. Because I also want to write and share my attempts at sustained, long-form dialogue for those of us who still enjoy reading nuanced and sometimes myopic (specific in its focus) explorations of various topics.
+                </p>
+                <br>
+                <br>
+                <p class="handwritten"> So, my vision: present a platform that allows others to experience, appreciate, and engaged with the way I see and love the world. 
+                </p>
+                <br>
+                <br>
+                <hr>
+                <br>
+                <p class="handwritten"> Some other notes: </p>
+                <br>
+                <br>
+                <p class="text-gray-700 handwritten">
+                    I don't want to just give you a product that is polished - I'm a novice when it comes to a lot of the tasks I've taken on (or plan to take on) and I want others to know how I stumble and stutter my way through some of my work - invite into the process so you may have insight into how someone like me learns. I want to show you the bare frameworks that lead to beauty, which is why you're going to see so many interactive knowledge lists. These will be project-specific (essentially a bibliography, e.g.interactive Iliad reading list) as well as broadly related to my personal experiences and tastes (e.g. Digi-shelf and Time-rope readings).  I want to always provide clarity around what I draw on and my methodology, so that you may be inspired to learn and create as well! 
+                </p>
+                <p class="handwritten">This is just a small part of my journey with the sublime; that feeling and experience that arises from the ineffable connection between the self and the outside world. I want you, the user, the reader, the map contributor, to go beyond consumption. This is why the words engagement and engage appear often enough to feel innumerable on this site and in my writing. My work, as you will encounter on the site (and beyond) is a part of me, and I wish, to the best of my abilities, to reach out and get you to think, interact, touch, grasp some of me in a purposeful and almost visceral manner. Soul to soul, if we're being poetic. </p><br><br> <p class="handwritten font-semibold text-green-700">In the era of short-form "content", made to be consumed without thought or much demands on the audience, I want to give myself and you more. I don't want to be cotton candy, one taste and gone. I want to linger, to delight, even irritate your palate in the way of spicy candied mangoes. </p>
+                <img src="images/mango.png" alt="Candied Mango" class="center">
             </section>
+        </div>
 
-            <section class="bg-white p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-semibold text-green-700 mb-3">Purpose & Vision</h2>
+        <div class="bg-white p-4 rounded-xl shadow-2xl">
+            <section class="bg-orange-50 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-family: Times New Roman font-bold text-green-900 mb-3">Interests</h2>
                 <p class="text-gray-700 leading-relaxed">
                      More to come!
                 </p>
-            </section>
-
-            <section class="bg-white p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-semibold text-green-700 mb-3">Interests</h2>
-                <p class="text-gray-700 leading-relaxed">
-                    More to come!
-                </p>
-            </section>
-
-            <section class="bg-white p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-semibold text-green-700 mb-3">Skills</h2>
-                <p class="text-gray-700 leading-relaxed">
-                    More to come!
-                </p>
-            </section>
-
-            <section class="py-6">
-               <div class="quote-image-container">
-    <a href="https://www.poetryfoundation.org/poems/47693/epilogue-56d22853c55c0">
-        <img src="https://raw.githubusercontent.com/graceofcartography/graceofcartography.github.io/refs/heads/main/images/RobLowell.png"
-             alt="Image with the text 'All's misalliance. Yet why not say what happened?'"
-             onerror="this.onerror=null; this.src='https://placehold.co/500x300/E2E8F0/4A5568?text=Inspirational+Image';">
-    </a>
-    <p class="quote-text-overlay">Epilogue by Robert Lowell</p>
-</div>
-            </section>
-
+            </section> 
         </div>
-    </main>
+
+        <div class="bg-white p-4 rounded-xl shadow-2xl">
+            <section class="bg-orange-50 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-family: Times New Roman font-bold text-green-900 mb-3">Skills</h2>               
+                <p class="text-gray-700 leading-relaxed">
+                    More to come!
+                </p>
+            </section>
+        </div>
+        
+        <div class="bg-white p-4 rounded-xl shadow-2xl">
+            <section class="bg-orange-50 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-family: Times New Roman font-bold text-green-900 mb-3">Positionality and Background
+                </h2>
+                <p class="text-gray-700 leading-relaxed">
+                    More to come!
+                </p>
+            </section>
+        </div>
+
+        <section class="py-6">
+           <div class="quote-image-container">
+                <a href="images/RobLowell.png"
+                         alt="Image with the text 'All's misalliance. Yet why not say what happened?'"
+                         onerror="this.onerror=null; this.src='https://placehold.co/500x300/E2E8F0/4A5568?text=Inspirational+Image';">
+                </a>
+                <p class="quote-text-overlay">Epilogue by Robert Lowell</p>
+            </div>
+        </section>
+
+    </div>
+</main>
 
     <footer class="py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
         &copy; <span id="currentYear"></span> Charissa Abi. All rights reserved.
