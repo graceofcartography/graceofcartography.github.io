@@ -93,17 +93,19 @@
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
-    <div class="flex-grow flex flex-col items-center justify-center p-4">
-        <h1 class="text-3xl md:text-4xl font-bold text-green-800 mb-8 text-center rounded-lg bg-white p-4 shadow-md">
+<div class="fixed top-0 left-0 w-full h-screen bg-[url('images/newgenbackground.png')] bg-cover bg-center -z-10"></div>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <h1 class="text-3xl md:text-4xl font-bold text-green-800 mb-8 text-center rounded-lg bg-orange-50 p-4 shadow-md">
             Digi-Shelf for June
         </h1>
         <div class="responsive-img-container bg-white rounded-lg shadow-xl p-6 overflow-hidden max-w-7xl mx-auto">
             <!-- Info Box - Moved inside the image container -->
             <div id="infoBox" class="info-box">
-                Hover and click for more details.
+                Hover or click to see more.
             </div>
 
-            <img src="https://raw.githubusercontent.com/graceofcartography/graceofcartography.github.io/refs/heads/main/images/digishelf.png" alt="Learning Shelf" class="rounded-lg"
+            <img src="images/digishelf.png" alt="Learning Shelf" class="rounded-lg"
                  onerror="this.onerror=null;this.src='https://placehold.co/1280x413/cccccc/000000?text=Image+Not+Loaded';this.alt='Placeholder Image - Original Not Loaded';">
 
             <svg class="svg-overlay" viewBox="0 0 960 310" preserveAspectRatio="xMidYMid meet">
@@ -126,14 +128,11 @@
             </svg>
         </div>
 
-<p class="text-lg md:text-xl text-gray-600 mb-6 mt-10 text-center max-w-2xl">
-            This is a digital "bookshelf" of all the things I have read, watched, encountered, and genuinely enjoyed engaging with (whether that was positively or negatively). I mostly read books and essays nowadays so I'd recommend you check out the pile of books and the ink pot first! Updated monthly!
+<p class="inline-block text-lg text-green-800 font-semibold mt-4 mb-3 bg-orange-25 backdrop-blur-sm rounded-md px-1 py-0.5 shadow">This is a digital "bookshelf" of all the things I have read, watched, encountered, and genuinely enjoyed engaging with (whether that was positively or negatively). I mostly read books and essays nowadays so I'd recommend you check out the pile of books and the ink pot first! Updated monthly!
         </p>
                      <div class="mt-12">
                 <a href="index.html" class="text-green-600 hover:text-green-800 font-medium">&larr; Back to home</a>
             </div>
-
-        </div>
     </main>
 
     <!-- Footer: This is the same footer as your other pages. -->
