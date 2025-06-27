@@ -14,6 +14,12 @@
             background-color: #f8f9fa; /* Light gray background */
             color: #343a40; /* Darker text for contrast */
         }
+   /* Active navigation link style */
+.nav-active {
+    background-color: #fff7ed; /* This is Tailwind's orange-300 */
+    color: #14532d; /* This is Tailwind's green-900 */
+    font-weight: 700; /* bold */
+}
         /* Custom styles for project card image to ensure it covers the area */
         .project-card-image {
             width: 100%;
@@ -28,33 +34,32 @@
             overflow: hidden; /* Ensures rounded corners apply to the image */
             border-radius: 0.5rem; /* Matches card's rounded corners */
         }
-
-        /* Active navigation link style */
-        .nav-active {
-            color: #047857; /* Tailwind's green-700 - a nice forest green */
-            font-weight: 600; /* semibold */
-        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
  <div class="fixed top-0 left-0 w-full h-screen bg-[url('images/indexbackground.png')] bg-cover bg-top -z-10"></div>
 
     <header class="py-6 px-4 sm:px-6 lg:px-8">
-        <div class="container mx-auto flex justify-between items-center">
-            <div>
-                <a class="text-2xl font-bold text-green-700">Charissa Abi</a>
-                <p class="text-sm text-gray-600 ml"> People. Place. Stories.</p>
-            </div>
-            <nav class="space-x-4">
-                <a href="https://graceofcartography.github.io/index.html" class="text-gray-600 hover:text-green-600 transition-colors">Home</a>
-                <a href="projects.html" class="nav-active">Projects</a>
-                <a href="https://www.linkedin.com/in/charisab/" class="text-gray-600 hover:text-green-600 transition-colors">LinkedIn</a>
-                <a href="https://graceofcartography.github.io/substack.html" class="text-gray-600 hover:text-green-600 transition-colors">Substack</a>
-                <a href="#youtube" class="text-gray-600 hover:text-green-600 transition-colors">YouTube</a>
-                <a href="monthlyengagement.html" class="text-gray-600 hover:text-green-600 transition-colors">Digi-Shelf</a>
-            </nav>
+    <div class="container mx-auto flex justify-between items-center">
+        
+        <div class="flex flex-col items-start space-y-1">
+            
+            <a href="index.html" class="inline-block text-2xl font-family: Times New Roman font-bold text-green-800 bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow">Charissa Abi</a>
+            
+            <p class="inline-block text-sm text-green-800 font-bold bg-orange-25 backdrop-blur-sm rounded-md px-2.5 py-0.5 shadow"> People. Place. Stories.</p>
+
         </div>
-    </header>
+
+        <nav class="flex items-center space-x-3">
+            <a href="index.html" class="text-green-800 hover:text-green-600 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors">Home</a>
+            <a href="projects.html" class="text-green-800 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors nav-active">Projects</a>
+            <a href="https://www.linkedin.com/in/charisab/" class="text-green-800 hover:text-green-600 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors">LinkedIn</a>
+            <a href="https://graceofcartography.github.io/substack.html" class="text-green-800 hover:text-green-600 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors">Substack</a>
+            <a href="#youtube" class="text-green-800 hover:text-green-600 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors">YouTube</a>
+            <a href="monthlyengagement.html" class="text-green-800 hover:text-green-600 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors">Digi-Shelf</a>
+        </nav>
+    </div>
+</header>
 <main class="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
     <div class="grid w-full max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2">
 
