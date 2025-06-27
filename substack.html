@@ -15,10 +15,11 @@
             color: #343a40; /* Darker text for contrast */
         }
         /* Active navigation link style */
-        .nav-active {
-            color: #047857; /* Tailwind's green-700 - a nice forest green */
-            font-weight: 600; /* semibold */
-        }
+.nav-active {
+    background-color: #fff7ed; /* This is Tailwind's orange-300 */
+    color: #14532d; /* This is Tailwind's green-900 */
+    font-weight: 700; /* bold */
+}
         .substack-entry {
             border-bottom: 1px solid #e5e7eb; /* light gray border */
         }
@@ -28,47 +29,77 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
+ <div class="fixed top-0 left-0 w-full h-screen bg-[url('images/newgenbackground.png')] bg-cover bg-top -z-10"></div>
 
     <header class="py-6 px-4 sm:px-6 lg:px-8">
-        <div class="container mx-auto flex justify-between items-center">
-            <div>
-                <a class="text-2xl font-bold text-green-700">Charissa Abi</a>
-                <p class="text-sm text-gray-600 ml"> People. Place. Stories.</p>
-            </div>
-            <nav class="space-x-4">
-                <a href="https://graceofcartography.github.io/index.html" class="text-gray-600 hover:text-green-600 transition-colors">Home</a>
-                <a href="https://graceofcartography.github.io/projects.html" class="text-gray-600 hover:text-green-600 transition-colors">Projects</a>
-                <a href="https://www.linkedin.com/in/charisab/" class="text-gray-600 hover:text-green-600 transition-colors">LinkedIn</a>
-                <a href="substack.html" class="nav-active">Substack</a> <a href="#youtube" class="text-gray-600 hover:text-green-600 transition-colors">YouTube</a>
-                <a href="monthlyengagement.html" class="text-gray-600 hover:text-green-600 transition-colors">Digi-Shelf</a>
-            </nav>
+    <div class="container mx-auto flex justify-between items-center">
+        
+        <div class="flex flex-col items-start space-y-1">
+            
+            <a href="index.html" class="inline-block text-2xl font-family: Times New Roman font-bold text-green-800 bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow">Charissa Abi</a>
+            
+            <p class="inline-block text-sm text-green-800 font-bold bg-orange-25 backdrop-blur-sm rounded-md px-2.5 py-0.5 shadow"> People. Place. Stories.</p>
+
         </div>
-    </header>
+
+        <nav class="flex items-center space-x-3">
+            <a href="index.html" class="text-green-800 hover:text-green-600 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors">Home</a>
+            <a href="projects.html" class="text-green-800 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors">Projects</a>
+            <a href="https://www.linkedin.com/in/charisab/" class="text-green-800 hover:text-green-600 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors">LinkedIn</a>
+            <a href="https://graceofcartography.github.io/substack.html" class="text-green-800 hover:text-green-600 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors nav-active">Substack</a>
+            <a href="#youtube" class="text-green-800 hover:text-green-600 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors">YouTube</a>
+            <a href="monthlyengagement.html" class="text-green-800 hover:text-green-600 font-semibold bg-orange-25 backdrop-blur-sm rounded-md px-3 py-1 shadow transition-colors">Digi-Shelf</a>
+        </nav>
+    </div>
+</header>
 
     <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="max-w-3xl mx-auto">
             
 
             <div class="space-y-8">
-                <article class="substack-entry pb-8">
+                <article class="substack-entry pb-8 bg-orange-25 backdrop-blur-sm rounded-md px-4 py-5 shadow">
                     <header>
-                        <h2 class="text-3xl font-semibold mb-2 text-gray-800">
+                        <h2 class="inline-block text-3xl font-semibold mb-2 text-green-800 bg-orange-50 backdrop-blur-sm rounded-md px-1.5 py-1 shadow">
                             Title of My First Post TBD
                         </h2>
-                        <p class="text-sm text-gray-500 mb-3">Published on June 3, 2025</p>
+<br>
+                        <p class="inline-block text-sm text-green-800 font-bold mb-3 bg-orange-25 backdrop-blur-sm rounded-md px-1.5 py-1 shadow">Published on June 3, 2025</p>
                     </header>
                     <div class="text-gray-700 leading-relaxed prose">
                         <p>
                             Summary to come!
                         </p>
                         <p>
-                            Another Paragraph If Needed.
+                          ...
                         </p>
                     </div>
                     <a href="#" class="inline-block mt-4 text-green-600 hover:text-green-800 font-medium">
                         Read more &rarr;
                     </a>
                 </article>
+                <article class="substack-entry pb-8 bg-orange-25 backdrop-blur-sm rounded-md px-4 py-5 shadow">
+                    <header>
+                        <h2 class="inline-block text-3xl font-semibold mb-2 text-green-800 bg-orange-50 backdrop-blur-sm rounded-md px-1.5 py-1 shadow">
+                            Title of My Second Post TBD
+                        </h2>
+<br>
+                        <p class="inline-block text-sm text-green-800 font-bold mb-3 bg-orange-25 backdrop-blur-sm rounded-md px-1.5 py-1 shadow">Published on June 3, 2025</p>
+                    </header>
+                    <div class="text-gray-700 leading-relaxed prose">
+                        <p>
+                            Summary to come!
+                        </p>
+                        <p>
+                          ...
+                        </p>
+                    </div>
+                    <a href="#" class="inline-block mt-4 text-green-600 hover:text-green-800 font-medium">
+                        Read more &rarr;
+                    </a>
+                </article>
+
+
                
                 </div>
         </div>
